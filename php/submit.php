@@ -8,16 +8,22 @@
 
 
 
-    
+$max = 5;    
 
 if(isset($_POST)){
+    $numbers = range(1, $max);
+    shuffle($numbers);
+    $number = print_r($numbers);
+    echo "<br>".$number;
     for ($i=1; $i < 6; $i++){
         $name = $_POST["name".$i];
         $email = $_POST["email".$i];
-        $random = mt_rand(1, 5);
-        echo $random;        
-        echo "Your name  is ".$name." and your e-mail is ".$email."<br>";
+        echo "Your name  is ".$name." and your e-mail is ".$email;
+        echo $name.$number."<br>";
     }
+    $newName = $_POST["name".$number];
+    $newEmail = $_POST["email".$number];
+    echo $newName.$newEmail;
 }
 
 // $random = mt_rand(1, 5);
@@ -30,16 +36,4 @@ if(isset($_POST)){
 //     }
 // }
 
-// $max = 5;
-// $done = false;
-// while(!$done){
-//     $numbers = range(0, $max);
-//     shuffle($numbers);
-//     $done = true;
-//     foreach($numbers as $key => $val){
-//         if($key == $val){
-//             $done = false;
-//             break;
-//         }
-//     }
-// }
+
