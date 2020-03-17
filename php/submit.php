@@ -7,33 +7,23 @@
 // zodat de mail met mail verzonden word
 
 
-
-$max = 5;    
+$max = 4;
 
 if(isset($_POST)){
-    $numbers = range(1, $max);
+    $numbers = range(0, $max);
     shuffle($numbers);
-    $number = print_r($numbers);
-    echo "<br>".$number;
-    for ($i=1; $i < 6; $i++){
+    for ($i=0; $i <= 4; $i++){
         $name = $_POST["name".$i];
         $email = $_POST["email".$i];
+        $random = $_POST["name".$numbers[$i]];
         echo "Your name  is ".$name." and your e-mail is ".$email;
-        echo $name.$number."<br>";
+        if($name !== $random){
+            echo $random."<br>";
+        } else {
+            echo "JE HEBT JEZELF GETROKKEN<br>";
+            // begin van de if(isset($_POST)){ aanroepen totdat iedereen iemand anders heeft
+        }
     }
-    $newName = $_POST["name".$number];
-    $newEmail = $_POST["email".$number];
-    echo $newName.$newEmail;
 }
-
-// $random = mt_rand(1, 5);
-// $array = [1, 2, 3, 4, 5];
-// for ($i=1; $i < 6; $i++) { 
-//     if($random = $array){
-
-//         $newResult = mt_rand(1, 5);
-//         echo $newResult;
-//     }
-// }
 
 

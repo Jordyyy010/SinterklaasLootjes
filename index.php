@@ -34,33 +34,33 @@
                         <div style="display:flex;flex-direction:column;">
                             <div>
                                 <label for="">Deelnemer 1:</label>
+                                <input type="text" name="name0">
+                                <label for="">Email:</label>
+                                <input type="email" name="email0">
+                            </div>
+                            <div>
+                                <label for="">Deelnemer 2:</label>
                                 <input type="text" name="name1">
                                 <label for="">Email:</label>
                                 <input type="email" name="email1">
                             </div>
                             <div>
-                                <label for="">Deelnemer 2:</label>
+                                <label for="">Deelnemer 3:</label>
                                 <input type="text" name="name2">
                                 <label for="">Email:</label>
                                 <input type="email" name="email2">
                             </div>
                             <div>
-                                <label for="">Deelnemer 3:</label>
+                                <label for="">Deelnemer 4:</label>
                                 <input type="text" name="name3">
                                 <label for="">Email:</label>
                                 <input type="email" name="email3">
                             </div>
                             <div>
-                                <label for="">Deelnemer 4:</label>
+                                <label for="">Deelnemer 5:</label>
                                 <input type="text" name="name4">
                                 <label for="">Email:</label>
                                 <input type="email" name="email4">
-                            </div>
-                            <div>
-                                <label for="">Deelnemer 5:</label>
-                                <input type="text" name="name5">
-                                <label for="">Email:</label>
-                                <input type="email" name="email5">
                             </div>
                         </div>
                     </div>
