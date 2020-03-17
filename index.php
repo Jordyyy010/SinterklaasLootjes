@@ -1,3 +1,28 @@
+<?php 
+
+$max = 4;
+function generateNames(){
+    if(isset($_POST)){
+        $numbers = range(0, $max);
+        shuffle($numbers);
+        for ($i=0; $i <= 4; $i++){
+            $name = $_POST["name".$i];
+            $email = $_POST["email".$i];
+            $random = $_POST["name".$numbers[$i]];
+            echo "Your name  is ".$name." and your e-mail is ".$email;
+            if($name !== $random){
+                echo $random."<br>";
+            } else {
+                // echo "JE HEBT JEZELF GETROKKEN<br>";
+                generateNames();
+                // begin van de if(isset($_POST)){ aanroepen totdat iedereen iemand anders heeft
+            }
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +52,7 @@
                 Snel, Eerlijk & Makkelijk!
             </p>
             <div>
-                <form action="php/submit.php" method="post">
+                <form action="generateNames()" method="post">
                     <button><strong>Stap 1:</strong> Deelnemers</button>
                     <header><strong>Datum viering:</strong><input type="number" value="5" max="31"><input type="number" value="12" max="12"><input type="number" value="2020" min="2020" max="2021"></header>
                     <div style="display:flex;width:100%;flex-direction:row;">
