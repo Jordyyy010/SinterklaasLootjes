@@ -1,16 +1,3 @@
-<?php
-   $to_email = "jordy4c@gmail.com";
-   $subject = "Simple Email Test via PHP";
-   $body = "Hi,Jordy This is test email send by PHP Script";
-   $headers = "From: jordy4c@gmail.com";
- 
-   if ( mail($to_email, $subject, $body, $headers)) {
-      echo("Email successfully sent to $to_email...");
-   } else {
-      echo("Email sending failed...");
-   }
-?>
-
 <?php 
 if (!isset($_POST["submit"])) { ?>
  
