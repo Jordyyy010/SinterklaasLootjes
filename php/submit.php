@@ -7,24 +7,24 @@
 // zodat de mail met mail verzonden word
 
 
-// $max = 4;
+$max = 4;
 
-// if(isset($_POST)){
-//     $numbers = range(0, $max);
-//     shuffle($numbers);
-//     for ($i=0; $i <= 4; $i++){
-//         $name = $_POST["name".$i];
-//         $email = $_POST["email".$i];
-//         $random = $_POST["name".$numbers[$i]];
-//         echo "Your name  is ".$name." and your e-mail is ".$email;
-//         if($name !== $random){
-//             echo $random."<br>";
-//         } else {
-//             echo "JE HEBT JEZELF GETROKKEN<br>";
-//             // begin van de if(isset($_POST)){ aanroepen totdat iedereen iemand anders heeft
-//         }
-//     }
-// }
+if(isset($_POST)){
+    $numbers = range(0, $max);
+    shuffle($numbers);
+    for ($i=0; $i <= 4; $i++){
+        $name = $_POST["name".$i];
+        $email = $_POST["email".$i];
+        $random = $_POST["name".$numbers[$i]];
+        echo "Your name  is ".$name." and your e-mail is ".$email;
+        if($name !== $random){
+            echo $random."<br>";
+        } else {
+            echo "JE HEBT JEZELF GETROKKEN<br>";
+            // begin van de if(isset($_POST)){ aanroepen totdat iedereen iemand anders heeft
+        }
+    }
+}
 
 
-mail('jordy4c@gmail.com','Test Onderwerp','Hello everyone!','From: jordy4c@gmail.com');
+// mail('jordy4c@gmail.com','Test Onderwerp','Hello everyone!','From: jordy4c@gmail.com');
