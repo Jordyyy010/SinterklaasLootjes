@@ -48,47 +48,47 @@ if(isset($_POST["submit"])){
                         <div class="names">
                             <strong>Jouw naam</strong>
                             <div class="flex-area">
-                                <input type="text" name="own-name" placeholder="Vul deelnemer 1 in"><button>x</button>
+                                <input type="text" name="own-name" placeholder="Vul deelnemer 1 in" required><button>x</button>
                             </div>
                         </div>
                         <div class="names">
                             <strong>Lootjes trekken met</strong>
                             <div class="flex-area">
-                                <input type="text" name="name2" placeholder="Vul deelnemer 2 in"><button>x</button>
+                                <input type="text" name="name2" placeholder="Vul deelnemer 2 in" required><button>x</button>
                             </div>
                             <div class="flex-area">
-                                <input type="text" name="name3" placeholder="Vul deelnemer 3 in"><button>x</button>
+                                <input type="text" name="name3" placeholder="Vul deelnemer 3 in" required><button>x</button>
                             </div>
                             <div class="flex-area">
-                                <input type="text" name="name4" placeholder="Vul deelnemer 4 in"><button>x</button>
+                                <input type="text" name="name4" placeholder="Vul deelnemer 4 in" required><button>x</button>
                             </div>
                             <div class="flex-area">
-                                <input type="text" name="name5" placeholder="Vul deelnemer 5 in"><button>x</button>
+                                <input type="text" name="name5" placeholder="Vul deelnemer 5 in" required><button>x</button>
                             </div>
                             <div class="flex-area">
-                                <input type="text" name="name6" placeholder="Vul deelnemer 6 in"><button>x</button>
+                                <input type="text" name="name6" placeholder="Vul deelnemer 6 in" required><button>x</button>
                             </div>
                             <a class="links" href="#">Meer namen invullen</a>
                         </div>
                         <div class="names">
                             <strong>Is de groep compleet?</strong>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Ja,</b> alle namen zijn ingevuld en iedereen doet zeker mee</a>
+                                <input type="radio" name="ingevuldenamen" value="ja" required><b>Ja,</b> alle namen zijn ingevuld en iedereen doet zeker mee
                             </div>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Nee,</b> later meer namen invullen of namen verwijderen</a>
+                                <input type="radio" name="ingevuldenamen" value="nee" required><b>Nee,</b> later meer namen invullen of namen verwijderen
                             </div>
                         </div>
                         <div class="names">
                             <strong>Aantal trekkingen</strong>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Eén,</b> iedereen trekt één lootje</a>
+                                <input type="radio" name="lootjes" value="1" required><b>Eén,</b> iedereen trekt één lootje
                             </div>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Twee,</b> iedereen trekt twee lootjes</a>
+                                <input type="radio" name="lootjes" value="2" required><b>Twee,</b> iedereen trekt twee lootjes
                             </div>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Geen,</b> alleen verlanglijstjes maken</a>
+                                <input type="radio" name="lootjes" value="0" required><b>Geen,</b> alleen verlanglijstjes maken
                             </div>
                         </div>
                         <input type="submit" name="submit" value="Volgende stap" class="next">
@@ -99,60 +99,71 @@ if(isset($_POST["submit"])){
 
                 <a class="links" href="#"><i class="fa fa-home">2</i>Uitsluitingen opgeven</a>
                 <div class="content-area active">
-                    <form action="#" method="GET">
+                    <form action="php/get-value.php" method="GET">
                         <div class="names">
                             <p>Met uitsluitingen bepaal je wie welke naam <b>niet</b> mag trekken.</p>
                             <div class="flex-area">
-                                <input type="radio"><a href="#"><b>Geen</b> uitsluiting gebruiken</a>
+                                <input type="radio" id="uitsluiting" name="uitsluiting" value="none" required><b>Geen</b> uitsluiting gebruiken
                             </div>
                             <div class="flex-area">
-                                <input type="radio"><a href="#">Uitsluitingen opgeven</a>
+                                <input type="radio" id="uitsluiting" name="uitsluiting" value="set" required>Uitsluitingen opgeven
                             </div>
                         </div>
-                        <div class="names">
-                            <strong>Naam deelnemer 1</strong>
-                            <select id="deelnemers">
-                                <option value="Deelnemer1">Deelnemer 2</option>
-                                <option value="Deelnemer1">Deelnemer 3</option>
-                                <option value="Deelnemer1">Deelnemer 4</option>
-                                <option value="Deelnemer1">Deelnemer 5</option>
-                            </select>
-                        </div>
-                        <div class="names">
-                            <strong>Naam deelnemer 2</strong>
-                            <select id="deelnemers">
-                                <option value="Deelnemer1">Deelnemer 1</option>
-                                <option value="Deelnemer1">Deelnemer 3</option>
-                                <option value="Deelnemer1">Deelnemer 4</option>
-                                <option value="Deelnemer1">Deelnemer 5</option>
-                            </select>
-                        </div>
-                        <div class="names">
-                            <strong>Naam deelnemer 3</strong>
-                            <select id="deelnemers">
-                                <option value="Deelnemer1">Deelnemer 1</option>
-                                <option value="Deelnemer1">Deelnemer 2</option>
-                                <option value="Deelnemer1">Deelnemer 4</option>
-                                <option value="Deelnemer1">Deelnemer 5</option>
-                            </select>
-                        </div>
-                        <div class="names">
-                            <strong>Naam deelnemer 4</strong>
-                            <select id="deelnemers">
-                                <option value="Deelnemer1">Deelnemer 1</option>
-                                <option value="Deelnemer1">Deelnemer 2</option>
-                                <option value="Deelnemer1">Deelnemer 3</option>
-                                <option value="Deelnemer1">Deelnemer 5</option>
-                            </select>
-                        </div>
-                        <div class="names">
-                            <strong>Naam deelnemer 5</strong>
-                            <select id="deelnemers">
-                                <option value="Deelnemer1">Deelnemer 1</option>
-                                <option value="Deelnemer1">Deelnemer 2</option>
-                                <option value="Deelnemer1">Deelnemer 3</option>
-                                <option value="Deelnemer1">Deelnemer 4</option>
-                            </select>
+                        <!-- <script>
+                            var uitsluiting = document.getElementById("uitsluiting").value;
+                            console.log(uitsluiting);
+                            if(var uitsluiting == "set") {
+                                document.getElementById('active').style.display = inline;
+                            } else {
+                                document.getElementById('active').style.display = none;
+                            }
+                        </script> -->
+                        <div id="active">
+                            <div class="names">
+                                <strong>Naam deelnemer 1</strong>
+                                <select id="deelnemers">
+                                    <option value="Deelnemer1">Deelnemer 2</option>
+                                    <option value="Deelnemer1">Deelnemer 3</option>
+                                    <option value="Deelnemer1">Deelnemer 4</option>
+                                    <option value="Deelnemer1">Deelnemer 5</option>
+                                </select>
+                            </div>
+                            <div class="names">
+                                <strong>Naam deelnemer 2</strong>
+                                <select id="deelnemers">
+                                    <option value="Deelnemer1">Deelnemer 1</option>
+                                    <option value="Deelnemer1">Deelnemer 3</option>
+                                    <option value="Deelnemer1">Deelnemer 4</option>
+                                    <option value="Deelnemer1">Deelnemer 5</option>
+                                </select>
+                            </div>
+                            <div class="names">
+                                <strong>Naam deelnemer 3</strong>
+                                <select id="deelnemers">
+                                    <option value="Deelnemer1">Deelnemer 1</option>
+                                    <option value="Deelnemer1">Deelnemer 2</option>
+                                    <option value="Deelnemer1">Deelnemer 4</option>
+                                    <option value="Deelnemer1">Deelnemer 5</option>
+                                </select>
+                            </div>
+                            <div class="names">
+                                <strong>Naam deelnemer 4</strong>
+                                <select id="deelnemers">
+                                    <option value="Deelnemer1">Deelnemer 1</option>
+                                    <option value="Deelnemer1">Deelnemer 2</option>
+                                    <option value="Deelnemer1">Deelnemer 3</option>
+                                    <option value="Deelnemer1">Deelnemer 5</option>
+                                </select>
+                            </div>
+                            <div class="names">
+                                <strong>Naam deelnemer 5</strong>
+                                <select id="deelnemers">
+                                    <option value="Deelnemer1">Deelnemer 1</option>
+                                    <option value="Deelnemer1">Deelnemer 2</option>
+                                    <option value="Deelnemer1">Deelnemer 3</option>
+                                    <option value="Deelnemer1">Deelnemer 4</option>
+                                </select>
+                            </div>
                         </div>
                         <input type="submit" value="Volgende stap" class="next">
                     </form>
@@ -162,16 +173,16 @@ if(isset($_POST["submit"])){
 
                 <a class="links" href="#"><i class="fa fa-home">3</i>Details viering instellen</a>
                 <div class="content-area active">
-                    <form action="#">
+                    <form action="php/insert-date.php">
                         <div class="names">
                             <strong>Groepsnaam</strong>
-                            <input type="text" placeholder="Vul een titel in voor deze viering">
+                            <input type="text" name="groepsnaam" placeholder="Vul een titel in voor deze viering" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
                                 <strong>Datum viering</strong><small>- optioneel</small>
                             </div>
-                            <input type="date" placeholder="Kies een datum">
+                            <input type="date" name="date" placeholder="Kies een datum" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
@@ -186,28 +197,28 @@ if(isset($_POST["submit"])){
                                 <strong>Cadeaubedrag</strong><small>- optioneel</small>
                             </div>
                             <select id="bedrag">
-                                <option value="5.00">€5,00</option>
-                                <option value="7.50">€7,50</option>
-                                <option value="10.00">€10,00</option>
-                                <option value="12.50">€12,50</option>
-                                <option value="15.00">€15,00</option>
-                                <option value="17.50">€17,50</option>
-                                <option value="20.00">€20,00</option>
-                                <option value="25.00">€25,00</option>
-                                <option value="30.00">€30,00</option>
-                                <option value="35.00">€35,00</option>
-                                <option value="40.00">€40,00</option>
-                                <option value="50.00">€50,00</option>
-                                <option value="60.00">€60,00</option>
-                                <option value="75.00">€75,00</option>
-                                <option value="80.00">€80,00</option>
-                                <option value="100.00">€100,00</option>
-                                <option value="125.00">€125,00</option>
-                                <option value="150.00">€150,00</option>
-                                <option value="175.00">€175,00</option>
-                                <option value="200.00">€200,00</option>
-                                <option value="250.00">€250,00</option>
-                                <option value="500.00">€500,00</option>
+                                <option name="bedrag" value="5.00">€5,00</option>
+                                <option name="bedrag" value="7.50">€7,50</option>
+                                <option name="bedrag" value="10.00">€10,00</option>
+                                <option name="bedrag" value="12.50">€12,50</option>
+                                <option name="bedrag" value="15.00">€15,00</option>
+                                <option name="bedrag" value="17.50">€17,50</option>
+                                <option name="bedrag" value="20.00">€20,00</option>
+                                <option name="bedrag" value="25.00">€25,00</option>
+                                <option name="bedrag" value="30.00">€30,00</option>
+                                <option name="bedrag" value="35.00">€35,00</option>
+                                <option name="bedrag" value="40.00">€40,00</option>
+                                <option name="bedrag" value="50.00">€50,00</option>
+                                <option name="bedrag" value="60.00">€60,00</option>
+                                <option name="bedrag" value="75.00">€75,00</option>
+                                <option name="bedrag" value="80.00">€80,00</option>
+                                <option name="bedrag" value="100.00">€100,00</option>
+                                <option name="bedrag" value="125.00">€125,00</option>
+                                <option name="bedrag" value="150.00">€150,00</option>
+                                <option name="bedrag" value="175.00">€175,00</option>
+                                <option name="bedrag" value="200.00">€200,00</option>
+                                <option name="bedrag" value="250.00">€250,00</option>
+                                <option name="bedrag" value="500.00">€500,00</option>
                             </select>
                         </div>
                         <div class="names">
