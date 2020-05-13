@@ -3,22 +3,17 @@
 require_once('conn.php');
 
 $groepsnaam = $_GET['groepsnaam'];
-$bedrag = $_GET['bedrag'];
 $datum = $_GET['date'];
+$trekking = $_GET['trekking'];
 
-echo $bedrag;
+$sql = "INSERT INTO Groep (GroepsNaam, DatumViering, DatumTrekking)
+VALUES ('$groepsnaam', '$datum', '$trekking')";
 
-if($bedrag == "") {
-    $bedrag = NULL;
-    echo $bedrag;
+if($conn->query($sql) === TRUE){
+    echo "Data is ingevoerd";
+} else {
+    echo "Actie mislukt";
 }
-
-// $sql = "INSERT INTO Groep (GroepsNaam, Bedrag, Datum)
-// VALUES ('$groepsnaam', '$bedrag', '$datum')";
-
-// if($conn->query($sql) === TRUE){
-//     echo "Datum is ingevoerd";
-// } else {
-//     echo "Actie mislukt";
-// }
 $conn->close();
+
+header('Location: ../created.php');

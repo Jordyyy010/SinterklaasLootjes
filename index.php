@@ -1,24 +1,3 @@
-<?php 
-
-$max = 4;
-if(isset($_POST["submit"])){
-    $numbers = range(0, $max);
-    shuffle($numbers);
-    for ($i=0; $i <= 4; $i++){
-        $name = $_POST["name".$i];
-        $email = $_POST["email".$i];
-        $random = $_POST["name".$numbers[$i]];
-        echo "Your name  is ".$name." and your e-mail is ".$email;
-        if($name !== $random){
-            echo "Je hebt ".$random." op je lootje<br>";
-        } else {
-            echo "JE HEBT JEZELF GETROKKEN<br>";
-        }
-    }
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +10,7 @@ if(isset($_POST["submit"])){
     <div class="justify-content">
         <div class="container">
             <h1 class="card-header">
-                Lootjes trekken
+                Lootjes trekken 
             </h1>
             <p class="card-body">
                 Super snel lootjes trekken met E-mail of WhatsApp<br>
@@ -68,7 +47,7 @@ if(isset($_POST["submit"])){
                             <div class="flex-area">
                                 <input type="text" name="name6" placeholder="Vul deelnemer 6 in" required><button>x</button>
                             </div>
-                            <a class="links" href="#">Meer namen invullen</a>
+                            <button onclick="addNames()" class="links" href="#">Meer namen invullen</button>
                         </div>
                         <div class="names">
                             <strong>Is de groep compleet?</strong>
@@ -173,23 +152,31 @@ if(isset($_POST["submit"])){
 
                 <a class="links" href="#"><i class="fa fa-home">3</i>Details viering instellen</a>
                 <div class="content-area active">
-                    <form action="php/insert-date.php">
+                    <form action="php/insert-date.php" method="GET">
                         <div class="names">
-                            <strong>Groepsnaam</strong>
+                            <div class="flex-area">
+                                <strong>Groepsnaam</strong><small>*</small>
+                            </div>
                             <input type="text" name="groepsnaam" placeholder="Vul een titel in voor deze viering" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
-                                <strong>Datum viering</strong><small>- optioneel</small>
+                                <strong>Datum viering</strong><small>*</small>
                             </div>
                             <input type="date" name="date" placeholder="Kies een datum" required>
+                        </div>
+                        <div class="names">
+                            <div class="flex-area">
+                                <strong>Datum trekking</strong><small>*</small>
+                            </div>
+                            <input type="number" name="trekking" placeholder="Kies het aantal dagen voor de trekking" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
                                 <strong>Postadres</strong><small>- optioneel</small>
                             </div>
                             <div class="flex-area">
-                                <input type="checkbox"><a href="#">Stuur elkaar cadeaus per post</a>
+                                <input type="checkbox">Stuur elkaar cadeaus per post
                             </div>
                         </div>
                         <div class="names">
@@ -197,6 +184,7 @@ if(isset($_POST["submit"])){
                                 <strong>Cadeaubedrag</strong><small>- optioneel</small>
                             </div>
                             <select id="bedrag">
+                                <option name="bedrag" value="0">Nog niet van toepassing</option>
                                 <option name="bedrag" value="5.00">€5,00</option>
                                 <option name="bedrag" value="7.50">€7,50</option>
                                 <option name="bedrag" value="10.00">€10,00</option>
@@ -222,15 +210,21 @@ if(isset($_POST["submit"])){
                             </select>
                         </div>
                         <div class="names">
-                            <strong>Jouw e-mail</strong>
+                            <div class="flex-area">
+                                <strong>Jouw e-mail</strong>
+                            </div>
                             <input type="text" placeholder="Vul je e-mailadres in">
                         </div>
                         <div class="names">
-                            <strong>Bericht</strong>
+                            <div class="flex-area">
+                                <strong>Bericht</strong>
+                            </div>
                             <textarea placeholder="Schrijf een bericht"></textarea>
                         </div>
                         <div class="names">
-                            <strong>Lootjes trekken</strong>
+                            <div class="flex-area">
+                                <strong>Lootjes trekken</strong>
+                            </div>
                             <p>De lootjes worden <b>direct getrokken.</b> Hierna kun 
                             je de uitsluitingen niet meer wijzigen. Bevestig de groep
                             en kies daarna hoe je de lootjes wilt versturen.</p>
@@ -241,5 +235,8 @@ if(isset($_POST["submit"])){
             </div>
         </div>
     </div>
+
+    <script type="text/javascript" src="script.js"></script>
+
 </body>
 </html>
