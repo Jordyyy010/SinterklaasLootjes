@@ -30,7 +30,7 @@
                                 <input type="text" name="own-name" placeholder="Vul deelnemer 1 in" required><button>x</button>
                             </div>
                         </div>
-                        <div class="names">
+                        <div class="names" id="participants">
                             <strong>Lootjes trekken met</strong>
                             <div class="flex-area">
                                 <input type="text" name="name2" placeholder="Vul deelnemer 2 in" required><button>x</button>
@@ -38,17 +38,59 @@
                             <div class="flex-area">
                                 <input type="text" name="name3" placeholder="Vul deelnemer 3 in" required><button>x</button>
                             </div>
-                            <div class="flex-area">
-                                <input type="text" name="name4" placeholder="Vul deelnemer 4 in" required><button>x</button>
-                            </div>
-                            <div class="flex-area">
-                                <input type="text" name="name5" placeholder="Vul deelnemer 5 in" required><button>x</button>
-                            </div>
-                            <div class="flex-area">
-                                <input type="text" name="name6" placeholder="Vul deelnemer 6 in" required><button>x</button>
-                            </div>
-                            <button onclick="addNames()" class="links" href="#">Meer namen invullen</button>
                         </div>
+                        <div class="names">
+                            <button onclick="addNames()" id="tests" class="links" href="#">Meer namen invullen</button>
+                        </div>
+                        <script type="text/javascript">
+                            var deelnemers = document.getElementById("participants");
+                            var clicks = 0;
+
+                            function addNames(){
+                                clicks += 1;
+                                var newInput = createNewInput();
+                                deelnemers.appendChild(newInput);
+                            }
+
+                            function createNewInput(){
+                                var div = document.createElement("div");
+                                var input = document.createElement("input");
+                                var deletebutton = document.createElement("button");
+                                var currentUser = 3 + clicks;
+
+                                div.className = "flex-area";
+                                input.type = "text";
+                                input.name = "name" + currentUser;
+                                input.placeholder = "Vul deelnemer " + currentUser + " in";
+                                deletebutton.innerText = "x";
+
+                                div.appendChild(input);
+                                div.appendChild(deletebutton);
+                                return div;
+                            }
+
+                            // Creating a cookie after the document is ready 
+                            // $(document).ready(function () { 
+                            //     createCookie("counter", clicks, "10"); 
+                            // });
+
+                            // Function to create the cookie 
+                            // function createCookie(name, value, days) { 
+                            //     var expires; 
+                                
+                            //     if (days) { 
+                            //         var date = new Date(); 
+                            //         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); 
+                            //         expires = "; expires=" + date.toGMTString(); 
+                            //     } 
+                            //     else { 
+                            //         expires = ""; 
+                            //     } 
+                                
+                            //     document.cookie = escape(name) + "=" +  
+                            //         escape(value) + expires + "; path=/php/insert-names.php"; 
+                            //     }
+                        </script>
                         <div class="names">
                             <strong>Is de groep compleet?</strong>
                             <div class="flex-area">

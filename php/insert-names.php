@@ -1,6 +1,14 @@
 <?php
 
-require_once('conn.php');
+// require_once('conn.php');
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "lootjes";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
 $oprichter = $_GET['own-name'];
 if (!preg_match("/^[a-zA-Z ]*$/",$oprichter)) {
@@ -13,20 +21,25 @@ if (!preg_match("/^[a-zA-Z ]*$/",$oprichter)) {
     echo "Beheerder aangemaakt<br>";
 }
 
-for($i = 2; $i < 7; $i++){
-    $deelnemer = $_GET["name".$i];
-    if (!preg_match("/^[a-zA-Z ]*$/",$deelnemer)) {
-        echo $deelnemer . " Alleen letters en spaties toegestaan<br>";
+// echo $_COOKIE["counter"];
+
+for($i = 2; $i < 30; $i++){
+    if($_GET["name".$i] === NULL){
+        echo "De error hierboven van Undefined index moet nog weg gehaald worden";
     } else {
-        echo $deelnemer;
-        $sql = "INSERT INTO Deelnemers (DeelnemersNaam)
-        VALUES ('$deelnemer')";
-        $conn->query($sql);
-        echo " Deelnemer aangemaakt<br>";
+        $deelnemer = $_GET["name".$i];
+        if (!preg_match("/^[a-zA-Z ]*$/",$deelnemer)) {
+            echo $deelnemer . " Alleen letters en spaties toegestaan<br>";
+        } else {
+            echo $deelnemer;
+            $sql = "INSERT INTO Deelnemers (DeelnemersNaam)
+            VALUES ('$deelnemer')";
+            $conn->query($sql);
+            echo " Deelnemer aangemaakt<br>";
+        }   
     }
 }
 
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -38,14 +51,16 @@ $conn->close();
 </head>
 <body>
     <?php
-        require_once('conn.php');
-
         $sql = "SELECT * FROM deelnemerdetails WHERE GroepId = '1'";
 
         $conn->query($sql);
 
-        foreach($sql as $deelnemer)
-            echo "<h1>" . $deelnemer . "</h1><br>";
+        // foreach($sql as $deelnemer)
+            // echo "<h1>".$deelnemer."</h1><br>";
+        
+
+        $conn->close();
+
     ?>
 </body>
 </html>
