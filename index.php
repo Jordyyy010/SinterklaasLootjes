@@ -46,12 +46,19 @@
                             var deelnemers = document.getElementById("participants");
                             var clicks = 0;
 
+                            // Update clicks by 1
+                            // Create new HTML code
+                            // Add that new HTML code at the bottom of the parent div
                             function addNames(){
                                 clicks += 1;
                                 var newInput = createNewInput();
                                 deelnemers.appendChild(newInput);
+                                createCookie("counter", clicks, "10");
                             }
 
+                            // Create each element for the new input field
+                            // Set all the attributes
+                            // Sort all the elements with each parent
                             function createNewInput(){
                                 var div = document.createElement("div");
                                 var input = document.createElement("input");
@@ -69,27 +76,21 @@
                                 return div;
                             }
 
-                            // Creating a cookie after the document is ready 
-                            // $(document).ready(function () { 
-                            //     createCookie("counter", clicks, "10"); 
-                            // });
 
-                            // Function to create the cookie 
-                            // function createCookie(name, value, days) { 
-                            //     var expires; 
+                            // Function to create the cookie
+                            function createCookie(name, value, days) {
+                                var expires;
                                 
-                            //     if (days) { 
-                            //         var date = new Date(); 
-                            //         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); 
-                            //         expires = "; expires=" + date.toGMTString(); 
-                            //     } 
-                            //     else { 
-                            //         expires = ""; 
-                            //     } 
-                                
-                            //     document.cookie = escape(name) + "=" +  
-                            //         escape(value) + expires + "; path=/php/insert-names.php"; 
-                            //     }
+                                if (days) {
+                                    var date = new Date();
+                                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                    expires = "; expires=" + date.toGMTString();
+                                }
+                                else {
+                                    expires = "";
+                                }
+                                document.cookie = escape(name) + "=" + escape(value) + expires + ";path=/";
+                            }
                         </script>
                         <div class="names">
                             <strong>Is de groep compleet?</strong>
