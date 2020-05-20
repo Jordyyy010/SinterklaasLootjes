@@ -6,8 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="php/testInsert.php" method="GET">
-        <label for="name">Naam</label><input type="text" name="testname">
-    </form>
-</body>
-</html>
+    
+<header>
+    <nav>
+        <div>
+            <a href="../index.php">Home</a>
+            <a href="../login/login.php">Inloggen</a>
+        </div>
+    </nav>
+</header>

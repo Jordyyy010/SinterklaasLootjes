@@ -13,23 +13,23 @@ a {
     flex-direction: column;
 }
 
-.names > select {
-    width: 50%;
-}
-
 .links {
-    color: lightblue;
+    color: rgb(0, 158, 211);
 }
 
 .content-area {
-    margin-bottom: 50px;
-    display: none;
+    margin-bottom: 20px;
 }
 
 .active {
     display: block;
 }
 
-.popup {
+.hidden {
     display: none;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
 }
