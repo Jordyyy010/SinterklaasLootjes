@@ -2,15 +2,15 @@
 
 if (isset($_POST['signup'])) {
  
-    // require "conn.php";
+    require "conn.php";
 
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "lootjes";
+    // $servername = "localhost";
+    // $username = "root";
+    // $password = "";
+    // $dbname = "lootjes";
 
     // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
+    // $conn = new mysqli($servername, $username, $password, $dbname);
 
     $username = $_POST['uid'];
     $mail = $_POST['mail'];

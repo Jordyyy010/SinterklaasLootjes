@@ -1,54 +1,57 @@
 <?php
 
 // Remote server verbinding
-// require_once('conn.php');
-
-// Localhost verbinding
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "lootjes";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
+// require "conn.php";
+require "localhost-conn.php";
 
 
 // Alle inputs ophalen
-$beheerder = $_GET['admin'];
-$mail = $_GET['mailadmin'];
-$groepsnaam = $_GET['groepsnaam'];
-$datum = $_GET['date'];
-$trekking = $_GET['trekking'];
-$postcode = $_GET['zip'];
-$bericht = $_GET['bericht'];
-$compleet = $_GET['compleet'];
+$beheerder = $_POST['admin'];
+$mail = $_POST['mailadmin'];
+$groepsnaam = $_POST['groepsnaam'];
+$datum = $_POST['date'];
+$trekking = $_POST['trekking'];
+$postcode = $_POST['zip'];
+$bericht = $_POST['bericht'];
+$compleet = $_POST['compleet'];
 
 
 
 // Opslaan van Groep
-if (!preg_match("/^[a-zA-Z ]*$/",$groepsnaam)) {
-    // Toekomstig redirect naar de vorige pagina en een 
-    // alert melding "Alleen letters en spaties toegestaan"
-    echo "Ongeldige groepsnaam of trekking<br>";
-} else {
-    $sql = "INSERT INTO Groep (GroepsNaam, DatumViering, DatumTrekking, Postcode, Compleet)
-    VALUES ('$groepsnaam', '$datum', '$trekking', '$postcode', '$compleet')";
-    $conn->query($sql);
+if(empty($groepsnaam) || empty($datum) || empty($trekking) || empty($postcode) || empty($compleet)){
+    header("Location: ../index.php?error=emptyfields");
+    exit();
 }
+else {
+    if (!preg_match("/^[a-zA-Z ]*$/",$groepsnaam)) {
+        header("Location: ../index.php?error=invalidgroepsnaam");
+        exit();
+    } else {
+        $sql = "INSERT INTO Groep (GroepsNaam, DatumViering, DatumTrekking, Postcode, Compleet)
+        VALUES ('$groepsnaam', '$datum', '$trekking', '$postcode', '$compleet')";
+        $conn->query($sql);
+    }
+}
+
 
 
 
 // Opslaan van Beheerder
-if (!preg_match("/^[a-zA-Z ]*$/",$beheerder && !filter_var($mail, FILTER_VALIDATE_EMAIL))) {
-    // Toekomstig redirect naar de vorige pagina en een 
-    // alert melding "Alleen letters en spaties toegestaan"
-    echo "Ongeldige naam of email<br>";
-} else {
-    $sql = "INSERT INTO Beheerder (BeheerdersNaam, Email, Bericht)
-    VALUES ('$beheerder', '$mail', '$bericht')";
-    $conn->query($sql);
+if(empty($beheerder) || empty($mail) || empty($bericht)){
+    header("Location: ../index.php?error=emptyfields");
+    exit();
 }
+else {
+    if (!preg_match("/^[a-zA-Z ]*$/",$beheerder && !filter_var($mail, FILTER_VALIDATE_EMAIL))) {
+        header("Location: ../index.php?error=invalidnamemail");
+        exit();
+    } else {
+        $sql = "INSERT INTO Beheerder (BeheerdersNaam, Email, Bericht)
+        VALUES ('$beheerder', '$mail', '$bericht')";
+        $conn->query($sql);
+    }
+}
+
 
 // Opslaan van deelnemerdetails
 // $sql = "SELECT BeheerderId FROM Beheerder WHERE BeheerdersNaam == '$beheerder'";
@@ -70,14 +73,14 @@ $standaardaantal = 1 + $_COOKIE['counter'];
 $loopaantal = 2 + $standaardaantal;
 // Sla elk ingevoerde naam op in de database
 for($i = 2; $i <= $loopaantal; $i++){
-    if($_GET["name".$i] === NULL){
-        // Redirect naar de vorige pagina met alert, "Niet alle vakjes zijn ingevoerd"
-        echo "Niet alle vakjes zijn ingevoerd";
+    if($_POST["name".$i] === NULL){
+        header("Location: ../index.php?error=emptydeelnemer".$i);
+        exit();
     } else {
-        $deelnemer = $_GET["name".$i];
+        $deelnemer = $_POST["name".$i];
         if (!preg_match("/^[a-zA-Z ]*$/",$deelnemer)) {
-            // Redirect naar de vorige pagina met alert, "Alleen letters en spaties toegestaan"
-            echo $deelnemer . " Alleen letters en spaties toegestaan<br>";
+            header("Location: ../index.php?error=invalidname");
+            exit();
         } else {
             $sql = "INSERT INTO Deelnemers (DeelnemersNaam)
             VALUES ('$deelnemer')";
