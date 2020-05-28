@@ -1,8 +1,8 @@
 <?php 
-    require "../extends/loginheader.php";
+    require "../header.php";
 ?>
 
-<div class="header">
+<div class="navigation">
     <form action="../includes/login.php" method="POST">
         <input type="text" name="mailuid" placeholder="Gebruikersnaam/E-mail...">
         <input type="password" name="pwd" placeholder="Wachtwoord...">
@@ -11,5 +11,5 @@
 </div>
 
 <?php 
-    require "../extends/footer.php";
+    require "../footer.php";
 ?>

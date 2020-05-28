@@ -29,7 +29,15 @@ a {
     display: none;
 }
 
-.header {
+nav {
+    margin-left: 80%;
+}
+
+.navigation {
     display: flex;
     flex-direction: row;
+}
+
+.navigation a{
+    margin-right: 10px;
 }

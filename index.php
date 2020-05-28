@@ -1,6 +1,7 @@
 <?php
-    require "extends/header.php"
+    require "header.php";
 ?>
+
     <div class="justify-content">
         <div class="container">
             <h1 class="card-header">
