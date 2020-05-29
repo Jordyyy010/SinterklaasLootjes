@@ -1,15 +1,10 @@
 <?php
 
 if(isset($_POST['login'])){
-    require 'conn.php';
-
-    // $servername = "localhost";
-    // $username = "root";
-    // $password = "";
-    // $dbname = "lootjes";
-
-    // Create connection
-    // $conn = new mysqli($servername, $username, $password, $dbname);
+    
+    // Database connections
+    require "conn.php";
+    // require "localhost-conn.php";
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];

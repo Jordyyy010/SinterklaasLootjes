@@ -16,7 +16,7 @@
                 hetzelfde lootje trekt als vorig jaar.
             </p>
             <div>
-                <form action="php/submit.php" method="POST">
+                <form action="includes/submit.php" method="POST">
                     <a class="links" href="#"><i class="fa fa-home">1</i>Namen invullen</a>
                     <div id="first-section" class="content-area">
                         <div class="names">

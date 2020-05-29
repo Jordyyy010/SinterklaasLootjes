@@ -1,6 +1,4 @@
-DROP DATABASE IF EXISTS lootjes;
-CREATE DATABASE lootjes;
-USE lootjes;
+USE lootjes_lootjes;
 
 DROP TABLE IF EXISTS DeelnemerDetails;
 DROP TABLE IF EXISTS Groep;
@@ -18,30 +16,30 @@ CREATE TABLE Gebruikers (
 
 CREATE TABLE Groep (
     `GroepId` INT NOT NULL AUTO_INCREMENT,
-    `GroepsNaam` VARCHAR(255) NOT NULL,
+    `GroepsNaam` TINYTEXT NOT NULL,
     `Bedrag` INT NULL,
     `DatumViering` DATE NOT NULL,
     `DatumTrekking` INT(3) NOT NULL,
-    `Postcode` CHAR(6) NOT NULL,
-    `Compleet` VARCHAR(255) NULL,
+    `Postcode` TINYTEXT NOT NULL,
+    `Compleet` TINYTEXT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (GroepId)
 );
 
 CREATE TABLE Deelnemers (
     `DeelnemerId` INT NOT NULL AUTO_INCREMENT,
-    `DeelnemersNaam` VARCHAR(255),
-    `Email` VARCHAR(50),
-    `Telefoonnummer` VARCHAR(15),
+    `DeelnemersNaam` TINYTEXT NOT NULL,
+    `Email` TINYTEXT NULL,
+    `Telefoonnummer` INT(15) NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (DeelnemerId)
 );
 
 CREATE TABLE Beheerder (
     `BeheerderId` INT NOT NULL AUTO_INCREMENT,
-    `BeheerdersNaam` VARCHAR(255) NOT NULL,
-    `Email` VARCHAR(255) NULL,
-    `Bericht` VARCHAR(255),
+    `BeheerdersNaam` TINYTEXT NOT NULL,
+    `Email` TINYTEXT NULL,
+    `Bericht` TINYTEXT,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (BeheerderId)
 );

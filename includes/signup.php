@@ -2,15 +2,9 @@
 
 if (isset($_POST['signup'])) {
  
+    // Database connections
     require "conn.php";
-
-    // $servername = "localhost";
-    // $username = "root";
-    // $password = "";
-    // $dbname = "lootjes";
-
-    // Create connection
-    // $conn = new mysqli($servername, $username, $password, $dbname);
+    // require "localhost-conn.php";
 
     $username = $_POST['uid'];
     $mail = $_POST['mail'];
@@ -78,7 +72,7 @@ if (isset($_POST['signup'])) {
                     // Defining inputs to the sql statement through prepared statements
                     mysqli_stmt_bind_param($stmt, "sss", $username, $mail, $hashedPwd);
                     mysqli_stmt_execute($stmt);
-                    header("Location: ../login/signup.php?registreren=succesvol");
+                    header("Location: ../login/login.php?registreren=succesvol");
                     exit();
                 }
             }
@@ -94,5 +88,3 @@ else {
     header("Location: ../login/signup.php");
     exit();
 }
-
-?>
