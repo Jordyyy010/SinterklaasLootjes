@@ -3,8 +3,8 @@
 if(isset($_POST['login'])){
     
     // Database connections
-    require "conn.php";
-    // require "localhost-conn.php";
+    // require "conn.php";
+    require "localhost-conn.php";
 
     $mailuid = $_POST['mailuid'];
     $password = $_POST['pwd'];

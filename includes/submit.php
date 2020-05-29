@@ -72,8 +72,7 @@ if(isset($_POST['submit'])) {
                 exit();
             }
             else {
-                $sql = "INSERT INTO Beheerder (BeheerdersNaam, Email, Bericht)
-                        VALUES (?, ?, ?)";
+                $sql = "INSERT INTO Beheerder (BeheerdersNaam, Email, Bericht) VALUES (?, ?, ?)";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt, $sql)) {
                     header("Location: ../index.php?error=sqlerror");
@@ -110,8 +109,7 @@ if(isset($_POST['submit'])) {
             exit();
         }
         else {
-            $sql = "INSERT INTO Deelnemers (DeelnemersNaam)
-                VALUES (?)";
+            $sql = "INSERT INTO Deelnemers (DeelnemersNaam) VALUES (?)";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)) {
                 header("Location: ../index.php?error=sqlerror");
@@ -120,11 +118,43 @@ if(isset($_POST['submit'])) {
             else {
                 mysqli_stmt_bind_param($stmt, "s", $deelnemer);
                 mysqli_stmt_execute($stmt);
-                header("Location: ../index.php?save=succes");
-                exit();
+                
+                
+                
+                // Opslaan deelnemerdetails
+                $sql = "SELECT GroepId FROM Groep WHERE GroepsNaam=?";
+                $stmt = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmt, $sql)){
+                    header("Location: ../index.php?error=sqlerror");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($stmt, "i", $groepsnaam);
+                    mysqli_stmt_execute($stmt);
+                    mysqli_stmt_store_result($stmt);
+                    $result = mysqli_stmt_num_rows($stmt);
+                    if(!$result > 0) {
+                        header("Location: ../index.php?error=noresults");
+                        exit();
+                    }
+                    else {
+                        $sql = "INSERT INTO DeelnemerDetails (GroepId) VALUES (?)";
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt, $sql)) {
+                            header("Location: ../index.php?error=sqlerror");
+                            exit();
+                        }
+                        else {
+                            mysqli_stmt_bind_param($stmt, "i", $result['GroepId']);
+                            mysqli_stmt_execute($stmt);
+                            header("Location: ../index.php?save=succes");
+                            exit();
+                        }
+                    }
+                }
             }
         }
-    } 
+    }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
 }

@@ -3,8 +3,8 @@
 if (isset($_POST['signup'])) {
  
     // Database connections
-    require "conn.php";
-    // require "localhost-conn.php";
+    // require "conn.php";
+    require "localhost-conn.php";
 
     $username = $_POST['uid'];
     $mail = $_POST['mail'];
