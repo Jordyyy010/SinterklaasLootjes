@@ -39,6 +39,7 @@
                         </div>
                         <script type="text/javascript">
                             var deelnemers = document.getElementById("participants");
+                            createCookie("counter", "0", "10");
                             var clicks = 0;
 
                             // Update clicks by 1
@@ -47,8 +48,7 @@
                             function addNames(){
                                 clicks += 1;
                                 var newInput = createNewInput();
-                                deelnemers.appendChild(newInput);
-                                document.cookie = escape("counter") + "=" + escape(clicks) + expires + ";path=/";
+                                createCookie("counter", clicks, "10");
                             }
 
                             // Create each element for the new input field
@@ -66,6 +66,20 @@
                                 return deelnemers;
                             }
 
+                            // Function to create the cookie
+                            function createCookie(name, value, days) {
+                                var expires;
+
+                                if (days) {
+                                        var date = new Date();
+                                        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                                        expires = "; expires=" + date.toGMTString();
+                                    }
+                                    else {
+                                        expires = "";
+                                    }
+                                    document.cookie = escape(name) + "=" + escape(value) + expires + ";path=/";
+                            }
                         </script>
                         <div class="names">
                             <strong>Is de groep compleet?</strong>

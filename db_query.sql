@@ -1,9 +1,11 @@
-USE lootjes_lootjes;
+DROP DATABASE IF EXISTS lootjes;
+CREATE DATABASE lootjes;
+USE lootjes;
 
 DROP TABLE IF EXISTS DeelnemerDetails;
 DROP TABLE IF EXISTS Groep;
 DROP TABLE IF EXISTS Deelnemers;
-DROP TABLE IF EXISTS Oprichter;
+DROP TABLE IF EXISTS Beheerder;
 DROP TABLE IF EXISTS Gebruikers;
 
 CREATE TABLE Gebruikers (

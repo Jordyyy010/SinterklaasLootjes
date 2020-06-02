@@ -89,14 +89,14 @@ if(isset($_POST['submit'])) {
 
 
     // Opslaan van deelnemers
-    if(isset($_COOKIE['counter'])){
+    if($_COOKIE['counter'] >= 0){
         $standaardaantal = 1 + $_COOKIE['counter'];
         $loopaantal = 2 + $standaardaantal;
     }
     else {
-        $loopaantal = 3;
+        header("Location: ../index.php?error=cookieerror");
+        exit();
     }
-
     // Sla elk ingevoerde naam op in de database
     for($i = 2; $i <= $loopaantal; $i++){
         $deelnemer = $_POST["name".$i];
@@ -133,6 +133,7 @@ if(isset($_POST['submit'])) {
                     mysqli_stmt_execute($stmt);
                     mysqli_stmt_store_result($stmt);
                     $result = mysqli_stmt_num_rows($stmt);
+                    $reality = $result['GroepId'];
                     if(!$result > 0) {
                         header("Location: ../index.php?error=noresults");
                         exit();
@@ -145,7 +146,7 @@ if(isset($_POST['submit'])) {
                             exit();
                         }
                         else {
-                            mysqli_stmt_bind_param($stmt, "i", $result['GroepId']);
+                            mysqli_stmt_bind_param($stmt, "i", $reality);
                             mysqli_stmt_execute($stmt);
                             header("Location: ../index.php?save=succes");
                             exit();

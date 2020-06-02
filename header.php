@@ -15,19 +15,19 @@
     <nav>
         <div class="navigation">
             <div class="left-nav">
-                <a href="/index.php">Home</a>
+                <a href="/sinterklaaslootjes/index.php">Home</a>
             </div>
             <div class="right-nav">
                 <?php
                     if(isset($_SESSION['userId'])){
-                        echo '<form action="/includes/logout.php">
-                            <a href="/user/index.php">'.$_SESSION['userUsername'].'</a>
+                        echo '<form action="/sinterklaaslootjes/includes/logout.php">
+                            <a href="/sinterklaaslootjes/user/index.php">'.$_SESSION['userUsername'].'</a>
                             <button type="submit" name="logout">Uitloggen</button>
                             </form>';
                     }
                     else {
-                        echo '<a href="/login/login.php">Inloggen</a>
-                            <a href="/login/signup.php">Registreren</a>';
+                        echo '<a href="/sinterklaaslootjes/login/login.php">Inloggen</a>
+                            <a href="/sinterklaaslootjes/login/signup.php">Registreren</a>';
                     }
                 ?>
             </div>
