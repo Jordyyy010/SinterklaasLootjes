@@ -22,12 +22,11 @@
                     if(isset($_SESSION['userId'])){
                         echo '<form action="/sinterklaaslootjes/includes/logout.php">
                             <a href="/sinterklaaslootjes/user/index.php">'.$_SESSION['userUsername'].'</a>
-                            <button type="submit" name="logout">Uitloggen</button>
+                            <button type="submit" name="logout" class="uitlog-button-link">Uitloggen</button>
                             </form>';
                     }
                     else {
-                        echo '<a href="/sinterklaaslootjes/login/login.php">Inloggen</a>
-                            <a href="/sinterklaaslootjes/login/signup.php">Registreren</a>';
+                        echo '<a href="/sinterklaaslootjes/login/login.php">Inloggen</a>';
                     }
                 ?>
             </div>

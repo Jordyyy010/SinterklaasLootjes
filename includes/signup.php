@@ -20,7 +20,7 @@ if (isset($_POST['signup'])) {
     else if (!filter_var($mail, FILTER_VALIDATE_EMAIL) && !preg_match("/^[a-zA-Z0-9]*$/", $username)) {
         header("Location: ../login/signup.php?error=invalidmailuid");
         exit();
-    } 
+    }
     // Check if mail isn't invalid
     else if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
         header("Location: ../login/signup.php?error=invalidmail&uid=".$username);

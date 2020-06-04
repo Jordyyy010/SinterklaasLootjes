@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
                 // Using else if stmt, $passwordCheck could be some other data then 1(true), when it's yes the user will be logged in. Now he won't
                 else if($passwordCheck == true) {
                     session_start();
-                    $_SESSION['userId'] = $row['GebruikerId'];
+                    $_SESSION['userId'] = $row['GebruikerID'];
                     $_SESSION['userUsername'] = $row['GebruikersNaam'];
 
                     header("Location: ../index.php?login=succes");
