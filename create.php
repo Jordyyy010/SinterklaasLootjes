@@ -154,7 +154,7 @@
                             <div class="flex-area">
                                 <strong>Datum trekking</strong><small>*</small>
                             </div>
-                            <input type="number" name="trekking" placeholder="Kies het aantal dagen voor de trekking" required>
+                            <input type="number" min="1" name="trekking" placeholder="Kies het aantal dagen voor de trekking" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
@@ -162,41 +162,17 @@
                             </div>
                             <input type="text" name="zip" placeholder="Voer de postcode in waar de viering plaats zal vinden">
                         </div>
-                        <!-- <div class="names">
+                        <div class="names">
                             <div class="flex-area">
                                 <strong>Cadeaubedrag</strong><small>- optioneel</small>
                             </div>
-                            <select id="bedrag">
-                                <option name="bedrag" value="0">Nog niet van toepassing</option>
-                                <option name="bedrag" value="5.00">€5,00</option>
-                                <option name="bedrag" value="7.50">€7,50</option>
-                                <option name="bedrag" value="10.00">€10,00</option>
-                                <option name="bedrag" value="12.50">€12,50</option>
-                                <option name="bedrag" value="15.00">€15,00</option>
-                                <option name="bedrag" value="17.50">€17,50</option>
-                                <option name="bedrag" value="20.00">€20,00</option>
-                                <option name="bedrag" value="25.00">€25,00</option>
-                                <option name="bedrag" value="30.00">€30,00</option>
-                                <option name="bedrag" value="35.00">€35,00</option>
-                                <option name="bedrag" value="40.00">€40,00</option>
-                                <option name="bedrag" value="50.00">€50,00</option>
-                                <option name="bedrag" value="60.00">€60,00</option>
-                                <option name="bedrag" value="75.00">€75,00</option>
-                                <option name="bedrag" value="80.00">€80,00</option>
-                                <option name="bedrag" value="100.00">€100,00</option>
-                                <option name="bedrag" value="125.00">€125,00</option>
-                                <option name="bedrag" value="150.00">€150,00</option>
-                                <option name="bedrag" value="175.00">€175,00</option>
-                                <option name="bedrag" value="200.00">€200,00</option>
-                                <option name="bedrag" value="250.00">€250,00</option>
-                                <option name="bedrag" value="500.00">€500,00</option>
-                            </select>
-                        </div> -->
+                            <input type="text" name="bedrag" placeholder="Vul het cadeaubedrag in, bijv: 0 25 of 50">
+                        </div>
                         <div class="names">
                             <div class="flex-area">
                                 <strong>Jouw e-mail</strong>
                             </div>
-                            <input type="text" name="mailadmin" placeholder="Vul je e-mailadres in" required>
+                            <input type="text" name="mailadmin" placeholder="Vul hier uw email in" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">

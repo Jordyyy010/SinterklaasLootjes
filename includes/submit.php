@@ -14,6 +14,7 @@ if(isset($_POST['submit'])) {
     $postcode = $_POST['zip'];
     $bericht = $_POST['bericht'];
     $compleet = $_POST['compleet'];
+    $bedrag = $_POST['bedrag'];
 
     // Ophalen registreren inputs
     $mail = $_POST['mail'];
@@ -27,20 +28,20 @@ if(isset($_POST['submit'])) {
         header("Location: ".$_SERVER['HTTP_REFERER']."?error=emptyfields");
         exit();
     }
-    else if(!preg_match("/^[a-zA-Z ]*$/",$groepsnaam)) {
-        header("Location: ".$_SERVER['HTTP_REFERER']."?error=invalidgroepsnaam");
+    else if(!preg_match("/^[a-zA-Z]*$/",$groepsnaam) || !preg_match("/^[0-9]*$/",$bedrag)) {
+        header("Location: ".$_SERVER['HTTP_REFERER']."?error=invalidgroepsnaam&invalidbedrag");
         exit();
     }
     else {
-        $sql = "INSERT INTO Groep (GroepsNaam, DatumViering, DatumTrekking, Postcode, Compleet)
-        VALUES (?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO Groep (GroepsNaam, Bedrag, DatumViering, DatumTrekking, Postcode, Compleet)
+        VALUES (?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
             exit();
         }
         else {
-            mysqli_stmt_bind_param($stmt, "sssss", $groepsnaam, $datum, $trekking, $postcode, $compleet);
+            mysqli_stmt_bind_param($stmt, "sisiss", $groepsnaam, $bedrag, $datum, $trekking, $postcode, $compleet);
             mysqli_stmt_execute($stmt);
         }
     }
@@ -115,6 +116,48 @@ if(isset($_POST['submit'])) {
                 }
             }
         }
+
+
+
+        // Direct inloggen na aanmaken nieuwe gebruiker
+        if(empty($mail) || empty($password)){
+            header("Location: ".$_SERVER['HTTP_REFERER']."?error=emptyfields");
+            exit();
+        }
+        else {
+            $sql = "SELECT * FROM Gebruikers WHERE Email=?";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt, $sql)){
+                header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
+                exit();
+            }
+            else {
+                mysqli_stmt_bind_param($stmt, "s", $mail);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
+                if($row = mysqli_fetch_assoc($result)){
+                    $passwordCheck = password_verify($password, $row['Wachtwoord']);
+                    if($passwordCheck == false) {
+                        header("Location: ".$_SERVER['HTTP_REFERER']."?error=passwordincorrect");
+                        exit();
+                    }
+                    else if($passwordCheck == true) {
+                        session_start();
+                        $_SESSION['userId'] = $row['GebruikerID'];
+                        $_SESSION['userUsername'] = $row['GebruikersNaam'];
+                        $_SESSION['userEmail'] = $row['Email'];
+                    }
+                    else {
+                        header("Location: ".$_SERVER['HTTP_REFERER']."?error");
+                        exit();
+                    }
+                }
+                else {
+                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=nouser");
+                    exit();
+                }
+            }
+        }
     }
 
 
@@ -131,69 +174,48 @@ if(isset($_POST['submit'])) {
             exit();
         }
         else {
-            $sql = "SELECT Email FROM Beheerders WHERE Email=?";
+            $sql = "SELECT * FROM Groep WHERE GroepsNaam=?";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)){
                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                 exit();
             }
             else {
-                mysqli_stmt_bind_param($stmt, "s", $mailadmin);
+                mysqli_stmt_bind_param($stmt, "s", $groepsnaam);
                 mysqli_stmt_execute($stmt);
-                mysqli_stmt_store_result($stmt);
-                $resultCheck = mysqli_stmt_num_rows($stmt);
-                // If there is a Beheerder with that email, throw an error
-                if($resultCheck > 0) {
-                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=emailtaken");
-                    exit();
-                }
-                else {
-                    $sql = "SELECT GroepID FROM Groep WHERE GroepsNaam=?";
+                $resultgroepid = mysqli_stmt_get_result($stmt);
+                if($groep = mysqli_fetch_assoc($resultgroepid)) {
+                    $sql = "SELECT * FROM Gebruikers WHERE GebruikersNaam=? AND Postcode=? AND Bedrag=?";
                     $stmt = mysqli_stmt_init($conn);
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                         exit();
                     }
                     else {
-                        mysqli_stmt_bind_param($stmt, "s", $groepsnaam);
+                        mysqli_stmt_bind_param($stmt, "ssi", $username, $postcode, $bedrag);
                         mysqli_stmt_execute($stmt);
-                        mysqli_stmt_store_result($stmt);
-                        $groepid = mysqli_stmt_num_rows($stmt);
-                        if($groepid <= 0) {
-                            header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
-                            exit();
-                        }
-                        else {
-                            $sql = "SELECT GebruikerID FROM Gebruikers WHERE GebruikersNaam=?";
+                        $resultid = mysqli_stmt_get_result($stmt);
+                        if($gebruiker = mysqli_fetch_assoc($resultid)) {
+                            $sql = "INSERT INTO Beheerders (BeheerdersNaam, Email, Bericht, GroepID, GebruikerID) VALUES (?, ?, ?, ?, ?)";
                             $stmt = mysqli_stmt_init($conn);
-                            if(!mysqli_stmt_prepare($stmt, $sql)){
+                            if(!mysqli_stmt_prepare($stmt, $sql)) {
                                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                                 exit();
                             }
                             else {
-                                mysqli_stmt_bind_param($stmt, "s", $username);
+                                mysqli_stmt_bind_param($stmt, "sssii", $username, $mailadmin, $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
                                 mysqli_stmt_execute($stmt);
-                                mysqli_stmt_store_result($stmt);
-                                $gebruikerid = mysqli_stmt_num_rows($stmt);
-                                if($gebruikerid <= 0) {
-                                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
-                                    exit();
-                                }
-                                else {
-                                    $sql = "INSERT INTO Beheerders (BeheerdersNaam, Email, Bericht, GroepID, GebruikerID) VALUES (?, ?, ?, ?, ?)";
-                                    $stmt = mysqli_stmt_init($conn);
-                                    if(!mysqli_stmt_prepare($stmt, $sql)) {
-                                        header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
-                                        exit();
-                                    }
-                                    else {
-                                        mysqli_stmt_bind_param($stmt, "sssii", $username, $mailadmin, $bericht, $groepid, $gebruikerid);
-                                        mysqli_stmt_execute($stmt);
-                                    }
-                                }
                             }
                         }
+                        else {
+                            header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
+                            exit();
+                        }
                     }
+                }
+                else {
+                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
+                    exit();
                 }
             }
         }
@@ -210,69 +232,48 @@ if(isset($_POST['submit'])) {
             exit();
         }
         else {
-            $sql = "SELECT Email FROM Beheerders WHERE Email=?";
+            $sql = "SELECT * FROM Groep WHERE GroepsNaam=? AND Postcode=? AND Bedrag=?";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)){
                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                 exit();
             }
             else {
-                mysqli_stmt_bind_param($stmt, "s", $mailadmin);
+                mysqli_stmt_bind_param($stmt, "ssi", $groepsnaam, $postcode, $bedrag);
                 mysqli_stmt_execute($stmt);
-                mysqli_stmt_store_result($stmt);
-                $resultCheck = mysqli_stmt_num_rows($stmt);
-                // If there is a Beheerder with that email, throw an error
-                if($resultCheck > 0) {
-                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=emailtaken");
-                    exit();
-                }
-                else {
-                    $sql = "SELECT GroepID FROM Groep WHERE GroepsNaam=?";
+                $resultgroepid = mysqli_stmt_get_result($stmt);
+                if($groep = mysqli_fetch_assoc($resultgroepid)) {
+                    $sql = "SELECT * FROM Gebruikers WHERE GebruikersNaam=?";
                     $stmt = mysqli_stmt_init($conn);
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                         exit();
                     }
                     else {
-                        mysqli_stmt_bind_param($stmt, "s", $groepsnaam);
+                        mysqli_stmt_bind_param($stmt, "s", $beheerder);
                         mysqli_stmt_execute($stmt);
-                        mysqli_stmt_store_result($stmt);
-                        $groepid = mysqli_stmt_num_rows($stmt);
-                        if($groepid <= 0) {
-                            header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
-                            exit();
-                        }
-                        else {
-                            $sql = "SELECT GebruikerID FROM Gebruikers WHERE GebruikersNaam=?";
+                        $resultid = mysqli_stmt_get_result($stmt);
+                        if($gebruiker = mysqli_fetch_assoc($resultid)) {
+                            $sql = "INSERT INTO Beheerders (BeheerdersNaam, Email, Bericht, GroepID, GebruikerID) VALUES (?, ?, ?, ?, ?)";
                             $stmt = mysqli_stmt_init($conn);
-                            if(!mysqli_stmt_prepare($stmt, $sql)){
+                            if(!mysqli_stmt_prepare($stmt, $sql)) {
                                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                                 exit();
                             }
                             else {
-                                mysqli_stmt_bind_param($stmt, "s", $beheerder);
+                                mysqli_stmt_bind_param($stmt, "sssii", $beheerder, $mailadmin, $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
                                 mysqli_stmt_execute($stmt);
-                                mysqli_stmt_store_result($stmt);
-                                $gebruikerid = mysqli_stmt_num_rows($stmt);
-                                if($gebruikerid <= 0) {
-                                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
-                                    exit();
-                                }
-                                else {
-                                    $sql = "INSERT INTO Beheerders (BeheerdersNaam, Email, Bericht, GroepID, GebruikerID) VALUES (?, ?, ?, ?, ?)";
-                                    $stmt = mysqli_stmt_init($conn);
-                                    if(!mysqli_stmt_prepare($stmt, $sql)) {
-                                        header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
-                                        exit();
-                                    }
-                                    else {
-                                        mysqli_stmt_bind_param($stmt, "sssii", $beheerder, $mailadmin, $bericht, $groepid, $gebruikerid);
-                                        mysqli_stmt_execute($stmt);
-                                    }
-                                }
                             }
                         }
+                        else {
+                            header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
+                            exit();
+                        }
                     }
+                }
+                else {
+                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
+                    exit();
                 }
             }
         }
@@ -288,54 +289,53 @@ if(isset($_POST['submit'])) {
     if($_COOKIE['counter'] >= 0){
         $standaardaantal = 1 + $_COOKIE['counter'];
         $loopaantal = 2 + $standaardaantal;
+        // Sla elk ingevoerde naam op in de database
+        for($i = 2; $i <= $loopaantal; $i++){
+            $deelnemer = $_POST["name".$i];
+            if($deelnemer === NULL){
+                header("Location: ".$_SERVER['HTTP_REFERER']."?error=emptydeelnemer".$i);
+                exit();
+            }
+            else if(!preg_match("/^[a-zA-Z ]*$/", $deelnemer)) {
+                header("Location: ".$_SERVER['HTTP_REFERER']."?error=invalidname");
+                exit();
+            }
+            else {
+                $sql = "SELECT * FROM Groep WHERE GroepsNaam=? AND Postcode=? AND Bedrag=?";
+                $stmt = mysqli_stmt_init($conn);
+                if(!mysqli_stmt_prepare($stmt, $sql)){
+                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
+                    exit();
+                }
+                else {
+                    mysqli_stmt_bind_param($stmt, "ssi", $groepsnaam, $postcode, $bedrag);
+                    mysqli_stmt_execute($stmt);
+                    $resultgroepid = mysqli_stmt_get_result($stmt);
+                    if($groep = mysqli_fetch_assoc($resultgroepid)) {
+                        $sql = "INSERT INTO Deelnemers (DeelnemersNaam, GroepID) VALUES (?, ?)";
+                        $stmt = mysqli_stmt_init($conn);
+                        if(!mysqli_stmt_prepare($stmt, $sql)) {
+                            header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
+                            exit();
+                        }
+                        else {
+                            mysqli_stmt_bind_param($stmt, "si", $deelnemer, $groep['GroepID']);
+                            mysqli_stmt_execute($stmt);
+                            header("Location: /sinterklaaslootjes/user/index.php?save=succes");
+                            exit();
+                        }
+                    }
+                    else {
+                        header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
+                        exit();   
+                    }
+                }
+            }
+        }
     }
     else {
         header("Location: ".$_SERVER['HTTP_REFERER']."?error=cookieerror");
         exit();
-    }
-    // Sla elk ingevoerde naam op in de database
-    for($i = 2; $i <= $loopaantal; $i++){
-        $deelnemer = $_POST["name".$i];
-        if($deelnemer === NULL){
-            header("Location: ".$_SERVER['HTTP_REFERER']."?error=emptydeelnemer".$i);
-            exit();
-        }
-        else if(!preg_match("/^[a-zA-Z ]*$/", $deelnemer)) {
-            header("Location: ".$_SERVER['HTTP_REFERER']."?error=invalidname");
-            exit();
-        }
-        else {
-            $sql = "SELECT GroepID FROM Groep WHERE GroepsNaam=?";
-            $stmt = mysqli_stmt_init($conn);
-            if(!mysqli_stmt_prepare($stmt, $sql)){
-                header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
-                exit();
-            }
-            else {
-                mysqli_stmt_bind_param($stmt, "s", $groepsnaam);
-                mysqli_stmt_execute($stmt);
-                mysqli_stmt_store_result($stmt);
-                $groepid = mysqli_stmt_num_rows($stmt);
-                if($groepid <= 0) {
-                    header("Location: ".$_SERVER['HTTP_REFERER']."?error=noresults");
-                    exit();
-                }
-                else {
-                    $sql = "INSERT INTO Deelnemers (DeelnemersNaam, GroepID) VALUES (?, ?)";
-                    $stmt = mysqli_stmt_init($conn);
-                    if(!mysqli_stmt_prepare($stmt, $sql)) {
-                        header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
-                        exit();
-                    }
-                    else {
-                        mysqli_stmt_bind_param($stmt, "si", $deelnemer, $groepid);
-                        mysqli_stmt_execute($stmt);
-                        header("Location: /sinterklaaslootjes/user/index.php?save=succes");
-                        exit();
-                    }
-                }
-            }
-        }
     }
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
