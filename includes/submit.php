@@ -174,25 +174,25 @@ if(isset($_POST['submit'])) {
             exit();
         }
         else {
-            $sql = "SELECT * FROM Groep WHERE GroepsNaam=?";
+            $sql = "SELECT * FROM Groep WHERE GroepsNaam=? AND Postcode=? AND Bedrag=?";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)){
                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                 exit();
             }
             else {
-                mysqli_stmt_bind_param($stmt, "s", $groepsnaam);
+                mysqli_stmt_bind_param($stmt, "ssi", $groepsnaam, $postcode, $bedrag);
                 mysqli_stmt_execute($stmt);
                 $resultgroepid = mysqli_stmt_get_result($stmt);
                 if($groep = mysqli_fetch_assoc($resultgroepid)) {
-                    $sql = "SELECT * FROM Gebruikers WHERE GebruikersNaam=? AND Postcode=? AND Bedrag=?";
+                    $sql = "SELECT * FROM Gebruikers WHERE GebruikersNaam=?";
                     $stmt = mysqli_stmt_init($conn);
                     if(!mysqli_stmt_prepare($stmt, $sql)){
                         header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
                         exit();
                     }
                     else {
-                        mysqli_stmt_bind_param($stmt, "ssi", $username, $postcode, $bedrag);
+                        mysqli_stmt_bind_param($stmt, "s", $username);
                         mysqli_stmt_execute($stmt);
                         $resultid = mysqli_stmt_get_result($stmt);
                         if($gebruiker = mysqli_fetch_assoc($resultid)) {
