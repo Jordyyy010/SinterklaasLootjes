@@ -1,15 +1,30 @@
 /* Element styling */
+html, body {
+    background-image: linear-gradient(white, #66c2ff, white);
+    background-size: auto;
+    height: 100%;
+}
 a {
     text-decoration: none;
     color: black;
 }
 
+h2{
+    margin: 15px 0;
+}
+
 
 
 /* Class styling */
+
+    /* Base */
 .container {
     width: 30%;
     margin: 0 auto;
+}
+
+.content-area {
+    margin-bottom: 20px;
 }
 
 .names {
@@ -18,12 +33,12 @@ a {
 }
 
 .links {
-    color: rgb(0, 158, 211);
+    color: #66c2ff;
     margin-top: 10px;
 }
 
 .button-links{
-    background-color: rgb(0, 158, 211);
+    background-color: #66c2ff;
     color: white;
     border: 0px;
     margin-bottom: 10px;
@@ -37,8 +52,56 @@ a {
     cursor: pointer;
 }
 
+
+
+    /* Login page */
+.system {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+    /* Error messages */
+.signuperror {
+    color: red;
+    text-align: center;
+}
+
+.signupsucces {
+    color: green;
+    text-align: center;
+}
+
+
+
+/* Header */
+.left-nav {
+    margin-left: 10%;
+    margin-right: 65%;
+}
+
+.right-nav {
+    width: 20%;
+    display: flex;
+    flex-direction: row;
+}
+
+.right-nav form{
+    width: 100%;
+}
+
+.right-nav a{
+    padding-right: 10px;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+}
+
 .uitlog-button-link{
-    background-color: rgb(0, 158, 211);
+    background-color: #66c2ff;
     color: white;
     border: 0px;
     padding: 3px;
@@ -50,50 +113,91 @@ a {
     cursor: pointer;
 }
 
-.content-area {
-    margin-bottom: 20px;
+.img {
+    width: 50px;
 }
 
-.navigation {
-    display: flex;
-    flex-direction: row;
+.height a{
+    margin: 0px 0px 20px 0px;
 }
 
-.system {
-    display: flex;
-    flex-direction: column;
+
+    /* Groep overzicht */
+.groep-container {
+    width: 75%;
+    margin: 0 auto;
 }
 
 .card-header-centered {
     text-align: center;
 }
 
-.signuperror {
-    color: red;
-    text-align: center;
-}
-
-.signupsucces {
-    color: green;
-    text-align: center;
-}
-
-.left-nav {
-    margin-left: 10%;
-    margin-right: 65%;
-}
-
-.right-nav {
-    width: 20%;
+.flex-area {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
-.right-nav form{
+
+.group-item {
+    width: 30%;
+    margin: 5px 10px;
+    background-color: #66c2ff;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px 10px 20px 10px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.left {
+    flex-grow: 1;
+}
+
+.group-header {
+    color: #fff;
+    margin-top: 10px;
+}
+
+.back-section {
+    background-color: #66c2ff;
+    padding: 10px 30px;
+    font-size: 20px;
+    margin-top: 30px;
+    border: 1px solid black;
+}
+
+.back-section a {
+    color: #fff;
+}
+
+.details {
+    padding: 20px 10px;
+}
+
+table {
+    border-collapse: collapse;
     width: 100%;
 }
-.right-nav a{
-    padding-right: 10px;
+
+tr {
+    display: flex;
 }
+
+td, th {
+    border: 1px solid #fff;
+    text-align: left;
+    padding: 8px;
+}
+
+td:first-child, th:first-child{
+    flex-grow: 1;
+}
+
+tr:nth-child(even) {
+    background-color: #fff;
+}
+
+
 
 
 

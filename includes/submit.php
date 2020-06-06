@@ -3,8 +3,8 @@
 
 if(isset($_POST['submit'])) {
     // Database connections
-    // require "conn.php";
-    require "localhost-conn.php";
+    require "conn.php";
+    // require "localhost-conn.php";
 
     // Alle inputs ophalen
     $mailadmin = $_POST['mailadmin'];
@@ -321,8 +321,6 @@ if(isset($_POST['submit'])) {
                         else {
                             mysqli_stmt_bind_param($stmt, "si", $deelnemer, $groep['GroepID']);
                             mysqli_stmt_execute($stmt);
-                            header("Location: /sinterklaaslootjes/user/index.php?save=succes");
-                            exit();
                         }
                     }
                     else {
@@ -332,6 +330,8 @@ if(isset($_POST['submit'])) {
                 }
             }
         }
+        header("Location: /sinterklaaslootjes/user/index.php?save=succes");
+        exit();
     }
     else {
         header("Location: ".$_SERVER['HTTP_REFERER']."?error=cookieerror");

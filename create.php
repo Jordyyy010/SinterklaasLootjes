@@ -138,7 +138,7 @@
                     
                     <div id="third-section" class="content-area">
                         <a class="links" href="#"><i class="fa fa-home">2</i>Details viering instellen</a>
-                        <div class="names">
+                            <div class="names">
                             <div class="flex-area">
                                 <strong>Groepsnaam</strong><small>*</small>
                             </div>
