@@ -3,8 +3,8 @@
 
 if(isset($_POST['submit'])) {
     // Database connections
-    require "conn.php";
-    // require "localhost-conn.php";
+    // require "conn.php";
+    require "localhost-conn.php";
 
     // Alle inputs ophalen
     $mailadmin = $_POST['mailadmin'];

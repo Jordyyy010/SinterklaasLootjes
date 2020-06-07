@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sinterklaas lootjes</title>
-    <link rel="stylesheet" type="text/css" href="/styling/style.css">
+    <link rel="stylesheet" type="text/css" href="/sinterklaaslootjes/styling/style.css">
 </head>
 <body>
 
@@ -15,18 +15,18 @@
     <nav>
         <div class="navigation">
             <div class="left-nav">
-                <a href="/index.php"><img class="img" src="/img/present.png" alt="cadeau"></a>
+                <a href="/sinterklaaslootjes/index.php"><img class="img" src="/sinterklaaslootjes/img/present.png" alt="cadeau"></a>
             </div>
             <div class="right-nav">
                 <?php
                     if(isset($_SESSION['userId'])){
-                        echo '<form action="/includes/logout.php">
-                            <a href="/user/index.php">'.$_SESSION['userUsername'].'</a>
+                        echo '<form action="/sinterklaaslootjes/includes/logout.php">
+                            <a href="/sinterklaaslootjes/user/index.php">'.$_SESSION['userUsername'].'</a>
                             <button type="submit" name="logout" class="uitlog-button-link">Uitloggen</button>
                             </form>';
                     }
                     else {
-                        echo '<a href="/login/login.php">Inloggen</a>';
+                        echo '<a href="/sinterklaaslootjes/login/login.php">Inloggen</a>';
                     }
                 ?>
             </div>

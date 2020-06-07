@@ -75,7 +75,7 @@ h2{
 
 
 
-/* Header */
+    /* Header */
 .left-nav {
     margin-left: 10%;
     margin-right: 65%;
@@ -171,7 +171,7 @@ h2{
 }
 
 .details {
-    padding: 20px 10px;
+    padding: 20px 0;
 }
 
 table {
@@ -193,10 +193,40 @@ td:first-child, th:first-child{
     flex-grow: 1;
 }
 
+td:last-child, th:last-child{
+    width: 105px;
+    text-align: center;
+}
+
+.groep-overzicht-center-td{
+    width: 71px;
+    text-align: center;
+}
+
 tr:nth-child(even) {
     background-color: #fff;
 }
 
+.new-input {
+    width: 100%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-participant-button{
+    background-color: #66c2ff;
+    color: white;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 17px;
+    margin: 5px auto 20px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid black;
+}
 
 
 
@@ -212,9 +242,20 @@ tr:nth-child(even) {
 
 
     /* Class styling */
+        /* Base styling */
+    .container{
+        width: 85%;
+    }
+
+
+
+        /* Header */
     .navigation{
         flex-direction: column;
         text-align: center;
+    }
+    .uitlog-button-link{
+        width: 100%;
     }
     .left-nav{
         margin: 0px auto;
@@ -232,13 +273,15 @@ tr:nth-child(even) {
         display: flex;
         flex-direction: column;
     }
-    .container{
-        width: 85%;
-    }
-    .uitlog-button-link{
+
+        /* Groep overzicht */
+    .group-item {
         width: 100%;
     }
 
+    .back-section {
+        text-align: center;
+    }
     
 
     /* Id styling */

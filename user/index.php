@@ -10,7 +10,7 @@
                 echo '<h1 class="card-header-centered">Groep overzicht van '.$_SESSION["userUsername"].'</h1>
                 <div class="flex-area">';
 
-                require "../includes/conn.php";
+                require "../includes/localhost-conn.php";
                 $sql = "SELECT Beheerders.BeheerdersNaam, Groep.GroepID, Groep.GroepsNaam, Groep.DatumViering
                         FROM Beheerders
                         INNER JOIN Groep
@@ -24,15 +24,20 @@
                     mysqli_stmt_bind_param($stmt, "i", $_SESSION['userId']);
                     mysqli_stmt_execute($stmt);
                     $resultCheck = mysqli_stmt_get_result($stmt);
+                    echo '<table>
+                            <tr>
+                                <th>Groepsnaam</th>
+                                <th class="groep-overzicht-center-td">Beheerder</th>
+                                <th>Datum Viering</th>
+                            </tr>';
                     while($row = mysqli_fetch_assoc($resultCheck)) {
-                        echo '<div class="group-item">
-                                <h2><a class="group-header" href="detail.php?id=' . $row['GroepID'] . '">' . $row["GroepsNaam"] . '</a></h2>
-                                <div class="navigation">
-                                    <div class="left">' . $row["BeheerdersNaam"] . '</div>
-                                    <div class="right">' . $row["DatumViering"] . '</div>
-                                </div>
-                            </div>';
+                        echo '<tr>
+                                <td><a href="detail.php?id=' . $row["GroepID"] . '">' . $row["GroepsNaam"] . '</a></td>
+                                <td class="groep-overzicht-center-td">' . $row["BeheerdersNaam"] . '</td>
+                                <td>' . $row["DatumViering"] . '</td>
+                            </tr>';
                     }
+                    echo '</table>';
                 }
                 
                 else {
@@ -43,7 +48,7 @@
             else {
                 echo '<h1 class="card-header-centered">Eerst inloggen</h1>
                 <p class="card-body">
-                    <a class="links" href="/sinterklaaslootjes/login/login.php">Klik hier om in te loggen</a>
+                    <h2 class="card-header-centered"><a class="signuperror" href="/sinterklaaslootjes/login/login.php">Klik hier om in te loggen</a></h2>
                 </p>';
             }
         ?>
