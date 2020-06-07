@@ -38,18 +38,16 @@
                             </tr>';
                     }
                     echo '</table>';
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
                 }
-                
                 else {
                     echo '<p class="signuperror">No results</p>';
                 }
                 echo '</div>';
             }
             else {
-                echo '<h1 class="card-header-centered">Eerst inloggen</h1>
-                <p class="card-body">
-                    <h2 class="card-header-centered"><a class="signuperror" href="/sinterklaaslootjes/login/login.php">Klik hier om in te loggen</a></h2>
-                </p>';
+                echo '<h2 class="card-header-centered"><a class="signuperror" href="/sinterklaaslootjes/login/login.php">Log in om het overzicht van jouw groepen te zien</a></h2>';
             }
         ?>
     </div>
