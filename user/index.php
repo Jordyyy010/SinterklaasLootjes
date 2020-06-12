@@ -11,10 +11,10 @@
                 <div class="flex-area">';
 
                 require "../includes/localhost-conn.php";
-                $sql = "SELECT Beheerders.BeheerdersNaam, Groep.GroepID, Groep.GroepsNaam, Groep.DatumViering
-                        FROM Beheerders
+                $sql = "SELECT Beheerder.BeheerdersNaam, Groep.GroepID, Groep.GroepsNaam, Groep.DatumViering
+                        FROM Beheerder
                         INNER JOIN Groep
-                        ON Beheerders.GroepID = Groep.GroepID
+                        ON Beheerder.GroepID = Groep.GroepID
                         WHERE GebruikerID=?";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt, $sql)){

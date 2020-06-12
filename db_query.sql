@@ -3,11 +3,11 @@ CREATE DATABASE lootjes;
 USE lootjes;
 
 DROP TABLE IF EXISTS Groep;
-DROP TABLE IF EXISTS Deelnemers;
-DROP TABLE IF EXISTS Beheerders;
-DROP TABLE IF EXISTS Gebruikers;
+DROP TABLE IF EXISTS Deelnemer;
+DROP TABLE IF EXISTS Beheerder;
+DROP TABLE IF EXISTS Gebruiker;
 
-CREATE TABLE Gebruikers (
+CREATE TABLE Gebruiker (
     GebruikerID INT NOT NULL AUTO_INCREMENT,
     GebruikersNaam TINYTEXT NOT NULL,
     Email TINYTEXT NOT NULL,
@@ -19,35 +19,36 @@ CREATE TABLE Gebruikers (
 CREATE TABLE Groep (
     GroepID INT NOT NULL AUTO_INCREMENT,
     GroepsNaam TINYTEXT NOT NULL,
-    Bedrag INT NULL,
+    Bedrag INT NOT NULL,
     DatumViering DATE NOT NULL,
     DatumTrekking INT(3) NOT NULL,
     Postcode TINYTEXT NOT NULL,
-    Compleet TINYTEXT NULL,
+    Compleet TINYTEXT NOT NULL,
+    Trekking TINYTEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (GroepID)
 );
 
-CREATE TABLE Deelnemers (
+CREATE TABLE Deelnemer (
     DeelnemerID INT NOT NULL AUTO_INCREMENT,
     DeelnemersNaam TINYTEXT NOT NULL,
     Email TINYTEXT NULL,
-    Telefoonnummer INT(15) NULL,
+    Getrokken CHAR(255) NULL,
     GroepID INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (DeelnemerID),
     FOREIGN KEY (GroepID) REFERENCES Groep (GroepID)
 );
 
-CREATE TABLE Beheerders (
+CREATE TABLE Beheerder (
     BeheerderID INT NOT NULL AUTO_INCREMENT,
     BeheerdersNaam TINYTEXT NOT NULL,
-    Email TINYTEXT NULL,
-    Bericht TINYTEXT,
-    GroepID INT NULL,
-    GebruikerID INT NULL,
+    Email TINYTEXT NOT NULL,
+    Bericht TINYTEXT NOT NULL,
+    GroepID INT NOT NULL,
+    GebruikerID INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (BeheerderId),
     FOREIGN KEY (GroepID) REFERENCES Groep (GroepID),
-    FOREIGN KEY (GebruikerID) REFERENCES Gebruikers (GebruikerID)
+    FOREIGN KEY (GebruikerID) REFERENCES Gebruiker (GebruikerID)
 );

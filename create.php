@@ -142,7 +142,7 @@
                             <div class="flex-area">
                                 <strong>Groepsnaam</strong><small>*</small>
                             </div>
-                            <input type="text" name="groepsnaam" placeholder="Vul een titel in voor deze viering" required>
+                            <input type="text" name="groepsnaam" placeholder="Vul een titel in voor deze viering">
                         </div>
                         <div class="names">
                             <div class="flex-area">
@@ -164,21 +164,21 @@
                         </div>
                         <div class="names">
                             <div class="flex-area">
-                                <strong>Cadeaubedrag</strong><small>- optioneel</small>
+                                <strong>Cadeaubedrag</strong><small>*</small>
                             </div>
                             <input type="text" name="bedrag" placeholder="Vul het cadeaubedrag in, bijv: 0 25 of 50">
                         </div>
                         <div class="names">
                             <div class="flex-area">
-                                <strong>Jouw e-mail</strong>
+                                <strong>Jouw e-mail</strong><small>*</small>
                             </div>
                             <input type="text" name="mailadmin" placeholder="Vul hier uw email in" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
-                                <strong>Bericht</strong>
+                                <strong>Bericht</strong><small>*</small>
                             </div>
-                            <textarea name="bericht" placeholder="Schrijf een bericht"></textarea>
+                            <textarea name="bericht">Hey iedereen, Ik had het idee om lootjes te gaan trekken. Doen jullie mee?</textarea>
                         </div>
                         <div class="names">
                             <div class="flex-area">

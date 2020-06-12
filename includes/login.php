@@ -16,7 +16,7 @@ if(isset($_POST['login'])){
     }
     // Checking if there is an user with that specific username or email
     else {
-        $sql = "SELECT * FROM Gebruikers WHERE GebruikersNaam=? OR Email=?";
+        $sql = "SELECT * FROM Gebruiker WHERE GebruikersNaam=? OR Email=?";
         $stmt = mysqli_stmt_init($conn);
         // Check if the sql statement has any errors before executing
         if(!mysqli_stmt_prepare($stmt, $sql)){

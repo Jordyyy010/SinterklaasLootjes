@@ -6,7 +6,7 @@ require "localhost-conn.php";
 $id = intval($_GET['id']);
 $groepid = intval($_GET['groepid']);
 
-$sql = "DELETE FROM Deelnemers WHERE DeelnemerID=? AND GroepID=?";
+$sql = "DELETE FROM Deelnemer WHERE DeelnemerID=? AND GroepID=?";
 $stmt = mysqli_stmt_init($conn);
 if(!mysqli_stmt_prepare($stmt, $sql)) {
     header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
@@ -17,7 +17,7 @@ else {
     mysqli_stmt_execute($stmt);
     
     // Check if there are still people participating in the group
-    $sql = "SELECT DeelnemerID FROM Deelnemers WHERE GroepID=?";
+    $sql = "SELECT DeelnemerID FROM Deelnemer WHERE GroepID=?";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)) {
         header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
@@ -34,7 +34,7 @@ else {
         }
         else {
             // First delete Beheerders row bc off the FK
-            $sql = "DELETE FROM Beheerders WHERE GroepID=?";
+            $sql = "DELETE FROM Beheerder WHERE GroepID=?";
             $stmt = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt, $sql)) {
                 header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");

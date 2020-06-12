@@ -15,7 +15,7 @@ if(isset($_POST['add'])){
         exit();
     }
     else {
-        $sql = "INSERT INTO Deelnemers (DeelnemersNaam, GroepID) VALUES (?, ?)";
+        $sql = "INSERT INTO Deelnemer (DeelnemersNaam, GroepID) VALUES (?, ?)";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $sql)){
             header("Location: ".$_SERVER['HTTP_REFERER']."?error=sqlerror");
