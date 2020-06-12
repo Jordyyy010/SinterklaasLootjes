@@ -10,7 +10,7 @@
                 echo '<h1 class="card-header-centered">Groep overzicht van '.$_SESSION["userUsername"].'</h1>
                 <div class="flex-area">';
 
-                require "../includes/localhost-conn.php";
+                require "../includes/conn.php";
                 $sql = "SELECT Beheerder.BeheerdersNaam, Groep.GroepID, Groep.GroepsNaam, Groep.DatumViering
                         FROM Beheerder
                         INNER JOIN Groep
@@ -47,7 +47,7 @@
                 echo '</div>';
             }
             else {
-                echo '<h2 class="card-header-centered"><a class="signuperror" href="/sinterklaaslootjes/login/login.php">Log in om het overzicht van jouw groepen te zien</a></h2>';
+                echo '<h2 class="card-header-centered"><a class="signuperror" href="/login/login.php">Log in om het overzicht van jouw groepen te zien</a></h2>';
             }
         ?>
     </div>

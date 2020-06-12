@@ -1,6 +1,6 @@
 <?php
 
-require "localhost-conn.php";
+require "conn.php";
 
 if(isset($_POST['add'])){
     $newdeelnemer = $_POST['nieuwlid'];

@@ -2,7 +2,7 @@
     require "redirect.php";
 
     if(isset($_POST['add'])) {
-        require "localhost-conn.php";
+        require "conn.php";
 
         $mail = $_POST['addmail'];
         $deelnemerid = intval($_GET['deelnemerid']);

@@ -9,7 +9,7 @@
         <div class="details">
         <?php
         if(isset($_SESSION['userId'])){
-            require "../includes/localhost-conn.php";
+            require "../includes/conn.php";
 
             $sql = "SELECT GroepsNaam, Compleet, Trekking
             FROM Groep
@@ -35,7 +35,7 @@
                                 </div>
                             </form>';
                     } else if($row["Compleet"] === "nee" && $row['Trekking'] == "0"){
-                        echo '<form action="/sinterklaaslootjes/includes/add.php?groepid=' . $id . '" method="POST">
+                        echo '<form action="/includes/add.php?groepid=' . $id . '" method="POST">
                                 <div class="names">
                                     <div class="flex-area">
                                         <input class="new-input" type="text" name="nieuwlid" placeholder="Voeg nog een deelnemer toe">
@@ -79,8 +79,8 @@
                     while($row = mysqli_fetch_assoc($result)){
                         echo '<tr>
                                 <td>' . $row['DeelnemersNaam'].'</td>
-                                <td><a class="signupsucces" href="/sinterklaaslootjes/user/update.php?deelnemerid='.$row['DeelnemerID'].'&groepid='.$id.'">Bewerken</a></td>
-                                <td><a class="signuperror" href="/sinterklaaslootjes/includes/delete.php?id=' . $row['DeelnemerID'] . '&groepid='.$id.'">Verwijderen</a></td>
+                                <td><a class="signupsucces" href="/user/update.php?deelnemerid='.$row['DeelnemerID'].'&groepid='.$id.'">Bewerken</a></td>
+                                <td><a class="signuperror" href="/includes/delete.php?id=' . $row['DeelnemerID'] . '&groepid='.$id.'">Verwijderen</a></td>
                             </tr>';
                     }
                     echo '</table';

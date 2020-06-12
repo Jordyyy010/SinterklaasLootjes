@@ -3,7 +3,7 @@
 session_start();
 
 if(isset($_SESSION['userId'])){
-    require "localhost-conn.php";
+    require "conn.php";
     require "redirect.php";
     $id = intval($_GET['id']);
 

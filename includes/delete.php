@@ -1,7 +1,7 @@
 <!-- Delete page WITHOUT HTML -->
 <?php
 
-require "localhost-conn.php";
+require "conn.php";
 
 $id = intval($_GET['id']);
 $groepid = intval($_GET['groepid']);

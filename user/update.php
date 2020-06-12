@@ -14,7 +14,7 @@
             <div class="details">';
 
         if(isset($_SESSION['userId'])){
-            require "../includes/localhost-conn.php";
+            require "../includes/conn.php";
             require "../includes/redirect.php";
 
             $sql = "SELECT DeelnemersNaam, Email FROM Deelnemer WHERE DeelnemerID=?";
@@ -42,7 +42,7 @@
             }
         }
         else {
-            echo '<h2 class="card-header-centered"><a class="signuperror" href="/sinterklaaslootjes/login/login.php">Log in om het overzicht van jouw groepen te zien</a></h2>';
+            echo '<h2 class="card-header-centered"><a class="signuperror" href="/login/login.php">Log in om het overzicht van jouw groepen te zien</a></h2>';
         }
         ?>
         </div>
