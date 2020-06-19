@@ -2,8 +2,7 @@
 
 
 if(isset($_POST['submit'])) {
-    // require "conn.php";
-    require "conn.php";
+    require "localhost-conn.php";
     require "redirect.php";
 
     // Alle inputs ophalen

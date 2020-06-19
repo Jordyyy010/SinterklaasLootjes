@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['complete'])){
-    require "conn.php";
+    require "localhost-conn.php";
 
     $id = $_GET['id'];
 

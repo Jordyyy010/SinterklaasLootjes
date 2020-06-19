@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sinterklaas lootjes</title>
     <link rel="stylesheet" type="text/css" href="/sinterklaaslootjes/styling/style.css">
+    <link rel="stylesheet" href="/sinterklaaslootjes/styling/css/all.css">
 </head>
 <body>
 

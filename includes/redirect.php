@@ -18,7 +18,7 @@ function redirectSucces($succesmsg){
 
 function redirectURL($url){
     global $conn;
-    header("Location: ".$url);
+    header("Location: ".$url."");
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
     exit();

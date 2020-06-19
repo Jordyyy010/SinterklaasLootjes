@@ -190,11 +190,14 @@ td, th {
 }
 
 td:first-child, th:first-child{
-    flex-grow: 1;
+    flex-grow: 2;
+}
+
+td:nth-child(2), th:nth-child(2) {
+    width: 40%;
 }
 
 td:last-child, th:last-child{
-    width: 105px;
     text-align: center;
 }
 
