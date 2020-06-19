@@ -19,7 +19,7 @@
                 <form action="includes/submit.php" method="POST">
                     <div class="content-area">
                         <div id="first-section">
-                            <a class="links" href="#"><i class="fa fa-home">1</i>Namen invullen</a>
+                            <a class="links" href="#">1. Namen invullen</a>
                             <?php
                                 if(isset($_SESSION['userId'])){
                                     echo '<div class="names">
@@ -137,7 +137,7 @@
 
                     
                     <div id="third-section" class="content-area">
-                        <a class="links" href="#"><i class="fa fa-home">2</i>Details viering instellen</a>
+                        <a class="links" href="#">2. Details viering instellen</a>
                             <div class="names">
                             <div class="flex-area">
                                 <strong>Groepsnaam</strong><small>*</small>
@@ -152,7 +152,7 @@
                         </div>
                         <div class="names">
                             <div class="flex-area">
-                                <strong>Datum trekking</strong><small>*</small>
+                                <strong>Aantal dagen voor trekking</strong><small>*</small>
                             </div>
                             <input type="number" min="1" name="trekking" placeholder="Kies het aantal dagen voor de trekking" required>
                         </div>
@@ -167,12 +167,6 @@
                                 <strong>Cadeaubedrag</strong><small>*</small>
                             </div>
                             <input type="text" name="bedrag" placeholder="Vul het cadeaubedrag in, bijv: 0 25 of 50">
-                        </div>
-                        <div class="names">
-                            <div class="flex-area">
-                                <strong>Jouw e-mail</strong><small>*</small>
-                            </div>
-                            <input type="text" name="mailadmin" placeholder="Vul hier uw email in" required>
                         </div>
                         <div class="names">
                             <div class="flex-area">
@@ -194,83 +188,6 @@
             </form>
         </div>
     </div>
-
-
-
-
-    <!-- <a class="links" href="#"><i class="fa fa-home">2</i>Uitsluitingen opgeven</a>
-                    <div id="second-section" class="content-area">
-                        <form action="php/get-value.php" method="GET">
-                            <div class="names">
-                                <p>Met uitsluitingen bepaal je wie welke naam <b>niet</b> mag trekken.</p>
-                                <div class="flex-area">
-                                    <input type="radio" id="uitsluiting" name="uitsluiting" value="none" required><b>Geen</b> uitsluiting gebruiken
-                                </div>
-                                <div class="flex-area">
-                                    <input type="radio" id="uitsluiting" name="uitsluiting" value="set" required>Uitsluitingen opgeven
-                                </div>
-                            </div>
-                            <script>
-                                var uitsluiting = document.getElementById("uitsluiting").value;
-                                console.log(uitsluiting);
-                                if(var uitsluiting == "set") {
-                                    document.getElementById('active').style.display = inline;
-                                } else {
-                                    document.getElementById('active').style.display = none;
-                                }
-                            </script>
-                            <div id="active">
-                                <div class="names">
-                                    <strong>Naam deelnemer 1</strong>
-                                    <select id="deelnemers">
-                                        <option value="Deelnemer1">Deelnemer 2</option>
-                                        <option value="Deelnemer1">Deelnemer 3</option>
-                                        <option value="Deelnemer1">Deelnemer 4</option>
-                                        <option value="Deelnemer1">Deelnemer 5</option>
-                                    </select>
-                                </div>
-                                <div class="names">
-                                    <strong>Naam deelnemer 2</strong>
-                                    <select id="deelnemers">
-                                        <option value="Deelnemer1">Deelnemer 1</option>
-                                        <option value="Deelnemer1">Deelnemer 3</option>
-                                        <option value="Deelnemer1">Deelnemer 4</option>
-                                        <option value="Deelnemer1">Deelnemer 5</option>
-                                    </select>
-                                </div>
-                                <div class="names">
-                                    <strong>Naam deelnemer 3</strong>
-                                    <select id="deelnemers">
-                                        <option value="Deelnemer1">Deelnemer 1</option>
-                                        <option value="Deelnemer1">Deelnemer 2</option>
-                                        <option value="Deelnemer1">Deelnemer 4</option>
-                                        <option value="Deelnemer1">Deelnemer 5</option>
-                                    </select>
-                                </div>
-                                <div class="names">
-                                    <strong>Naam deelnemer 4</strong>
-                                    <select id="deelnemers">
-                                        <option value="Deelnemer1">Deelnemer 1</option>
-                                        <option value="Deelnemer1">Deelnemer 2</option>
-                                        <option value="Deelnemer1">Deelnemer 3</option>
-                                        <option value="Deelnemer1">Deelnemer 5</option>
-                                    </select>
-                                </div>
-                                <div class="names">
-                                    <strong>Naam deelnemer 5</strong>
-                                    <select id="deelnemers">
-                                        <option value="Deelnemer1">Deelnemer 1</option>
-                                        <option value="Deelnemer1">Deelnemer 2</option>
-                                        <option value="Deelnemer1">Deelnemer 3</option>
-                                        <option value="Deelnemer1">Deelnemer 4</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <input type="submit" value="Volgende stap" class="next">
-                        </form>
-                    </div> -->
-
-
 
 
 <?php

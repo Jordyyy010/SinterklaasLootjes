@@ -41,6 +41,8 @@ if(isset($_POST['login'])){
                     session_start();
                     $_SESSION['userId'] = $row['GebruikerID'];
                     $_SESSION['userUsername'] = $row['GebruikersNaam'];
+                    $_SESSION['userEmail'] = $row['Email'];
+
 
                     header("Location: ../index.php?login=succes");
                     exit();

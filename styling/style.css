@@ -201,6 +201,20 @@ td:last-child, th:last-child{
     text-align: center;
 }
 
+td input[type=text] {
+    display: none;
+}
+
+td.edit input[type=text] {
+    display: inline;
+}
+
+td.edit label {
+    display: none;
+}
+
+
+
 .groep-overzicht-center-td{
     width: 71px;
     text-align: center;

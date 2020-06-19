@@ -10,7 +10,7 @@ function redirectError($errormsg){
 
 function redirectSucces($succesmsg){
     global $conn;
-    header("Location: ".$_SERVER['HTTP_REFERER']."?".$succesmsg);
+    header("Location: \sinterklaaslootjes\user\index.php?".$succesmsg);
     mysqli_stmt_close($stmt);
     mysqli_close($conn);
     exit();

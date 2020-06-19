@@ -6,7 +6,6 @@ if(isset($_POST['submit'])) {
     require "redirect.php";
 
     // Alle inputs ophalen
-    $mailadmin = $_POST['mailadmin'];
     $groepsnaam = $_POST['groepsnaam'];
     $datum = $_POST['date'];
     $trekkingsdatum = $_POST['trekking'];
@@ -46,7 +45,7 @@ if(isset($_POST['submit'])) {
 
 
     // Opslaan van Gebruiker
-    if(isset($_POST['uid'])){
+    if(!isset($_SESSION['userId'])){
         // Ophalen registratie inputs
         $username = $_POST['uid'];
         $mail = $_POST['mail'];
@@ -150,17 +149,13 @@ if(isset($_POST['submit'])) {
                 }
             }
         }
-    }
 
 
 
-    // Opslaan van beheerder met aanmaken nieuw account
-    if(isset($_POST['uid'])){
-        $username = $_POST['uid'];
-        if(empty($username) || empty($mailadmin) || empty($bericht)){
+        if(empty($username) || empty($bericht)){
             redirectError("error=emptyfields");
         }
-        else if(!preg_match("/^[a-zA-Z ]*$/",$username && !filter_var($mailadmin, FILTER_VALIDATE_EMAIL))) {
+        else if(!preg_match("/^[a-zA-Z ]*$/",$username && !filter_var($_SESSION['userEmail'], FILTER_VALIDATE_EMAIL))) {
             redirectError("error=invalidnamemail");
         }
         else {
@@ -190,7 +185,7 @@ if(isset($_POST['submit'])) {
                                 redirectError("error=sqlerror");
                             }
                             else {
-                                mysqli_stmt_bind_param($stmt, "sssii", $username, $mailadmin, $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
+                                mysqli_stmt_bind_param($stmt, "sssii", $username, $_SESSION['userEmail'], $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
                                 mysqli_stmt_execute($stmt);
 
                                 $sql = "INSERT INTO Deelnemer (DeelnemersNaam, Email, GroepID) VALUES (?, ?, ?)";
@@ -199,7 +194,7 @@ if(isset($_POST['submit'])) {
                                     redirectError("error=sqlerror");
                                 }
                                 else {
-                                    mysqli_stmt_bind_param($stmt, "ssi", $username, $mailadmin, $groep['GroepID']);
+                                    mysqli_stmt_bind_param($stmt, "ssi", $username, $_SESSION['userEmail'], $groep['GroepID']);
                                     mysqli_stmt_execute($stmt);
                                 }
                             }
@@ -215,13 +210,17 @@ if(isset($_POST['submit'])) {
             }
         }
     }
+
+
+
+
     // Beheerder opslaan met al ingelogde gebruiker
-    else if(isset($_POST['admin'])) {
+    else if(isset($_SESSION['userId'])) {
         $beheerder = $_POST['admin'];
-        if(empty($beheerder) || empty($mailadmin) || empty($bericht)){
+        if(empty($beheerder) || empty($bericht)){
             redirectError("error=emptyfields");
         }
-        else if(!preg_match("/^[a-zA-Z ]*$/",$beheerder && !filter_var($mailadmin, FILTER_VALIDATE_EMAIL))) {
+        else if(!preg_match("/^[a-zA-Z ]*$/",$beheerder && !filter_var($_SESSION['userEmail'], FILTER_VALIDATE_EMAIL))) {
             redirectError("error=invalidnamemail");
         }
         else {
@@ -251,7 +250,7 @@ if(isset($_POST['submit'])) {
                                 redirectError("error=sqlerror");
                             }
                             else {
-                                mysqli_stmt_bind_param($stmt, "sssii", $beheerder, $mailadmin, $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
+                                mysqli_stmt_bind_param($stmt, "sssii", $beheerder, $_SESSION['userEmail'], $bericht, $groep['GroepID'], $gebruiker['GebruikerID']);
                                 mysqli_stmt_execute($stmt);
 
                                 $sql = "INSERT INTO Deelnemer (DeelnemersNaam, Email, GroepID) VALUES (?, ?, ?)";
@@ -260,7 +259,7 @@ if(isset($_POST['submit'])) {
                                     redirectError("error=sqlerror");
                                 }
                                 else {
-                                    mysqli_stmt_bind_param($stmt, "ssi", $username, $mailadmin, $groep['GroepID']);
+                                    mysqli_stmt_bind_param($stmt, "ssi", $beheerder, $_SESSION['userEmail'], $groep['GroepID']);
                                     mysqli_stmt_execute($stmt);
                                 }
                             }

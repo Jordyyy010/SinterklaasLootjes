@@ -86,12 +86,60 @@
                                 <th><i class="far fa-trash-alt"></i></th>
                             </tr>';
                     while($row = mysqli_fetch_assoc($result)){
-                        echo '<tr>
+                        echo '<tr class="row">
                                 <td>' . $row['DeelnemersNaam'].'</td>
-                                <td>' . $row['Email'] . '</td>
-                                <td><a class="signupsucces" href="update.php?groepid='.$groepid.'&deelnemerid='.$row['DeelnemerID'].'"><i class="far fa-edit"></i></a></td>
+
+
+
+
+                                <td>
+                                    <label>'.$row['Email'].'</label>
+                                    <input type="text" value="'.$row['Email'].'"></input>
+                                    <button class="edit signupsucces far fa-edit"></button>
+                                </td>
+
+
+
+
+
                                 <td><a class="signuperror" href="../includes/delete.php?id=' . $row['DeelnemerID'] . '&groepid='.$groepid.'"><i class="far fa-trash-alt"></i></a></td>
-                            </tr>';
+                            </tr>
+                            
+                            
+                            
+                            
+                            
+                            
+                            <script type="text/javascript">
+                                var taskListItem = document.getElementsByClassName("row");
+                                
+                                bindButtons(taskListItem);
+                            
+                                var bindButtons = function(Parent){
+                                    var editButton = Parent.querySelector("button.edit");
+                                    editButton.onclick = edit;
+
+                                }
+
+
+                                var edit = function(){
+                                    console.log("This works");
+                                    var editRow = this.parentNode;
+
+                                    var editInput = editRow.querySelector("input[type=text]");
+                                    var label = editRow.querySelector("label");
+                                    var containsClass = editRow.classList.contains("edit");
+
+                                    if(containsClass) {
+                                        label.innerText = editInput.value;
+                                    }
+                                    else {
+                                        editInput.value = label.innerText;
+                                    }
+
+                                    editRow.classList.toggle("edit");
+                                }
+                            </script>';
                     }
                     echo '</table';
                 }
@@ -107,7 +155,6 @@
         </div>
     </div>
 </div>
-
 
 
 <?php
