@@ -68,6 +68,7 @@
                         exit();
                     }
                 }
+
                 $sql = "SELECT DeelnemerID, DeelnemersNaam, Email FROM Deelnemer WHERE GroepID=?";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt, $sql)) {
@@ -82,66 +83,66 @@
                             <tr>
                                 <th>Deelnemers</th>
                                 <th>Email</th>
-                                <th><i class="far fa-edit"></i></th>
                                 <th><i class="far fa-trash-alt"></i></th>
                             </tr>';
+
+                    $counter = 0;
                     while($row = mysqli_fetch_assoc($result)){
-                        echo '<tr class="row">
-                                <td>' . $row['DeelnemersNaam'].'</td>
+                    echo '<tr id="tabs'.$counter.'">
+                            <td class="firsttab">' . $row['DeelnemersNaam'].'</td>
 
 
 
-
-                                <td>
-                                    <label>'.$row['Email'].'</label>
-                                    <input type="text" value="'.$row['Email'].'"></input>
-                                    <button class="edit signupsucces far fa-edit"></button>
-                                </td>
-
-
-
-
-
-                                <td><a class="signuperror" href="../includes/delete.php?id=' . $row['DeelnemerID'] . '&groepid='.$groepid.'"><i class="far fa-trash-alt"></i></a></td>
-                            </tr>
+                            <td class="secondtab">
+                                <label>'.$row['Email'].'</label>
+                                <form action="../includes/update.php?deelnemerid='.$row['DeelnemerID'].'&groepid='.$groepid.'" method="POST">
+                                    <input type="text" name="updatemail"></input>
+                                    <button class="uitlog-button-link" name="add" type="submit">Save</button>
+                                </form>
+                                <a class="uitlog-button-link">Edit</a>
+                            </td>
                             
                             
                             
                             
-                            
-                            
-                            <script type="text/javascript">
-                                var taskListItem = document.getElementsByClassName("row");
-                                
-                                bindButtons(taskListItem);
-                            
-                                var bindButtons = function(Parent){
-                                    var editButton = Parent.querySelector("button.edit");
-                                    editButton.onclick = edit;
+                            <td class="thirdtab"><a class="signuperror" href="../includes/delete.php?id=' . $row['DeelnemerID'] . '&groepid='.$groepid.'"><i class="far fa-trash-alt"></i></a></td>
+                        </tr>';
 
-                                }
-
-
-                                var edit = function(){
-                                    console.log("This works");
-                                    var editRow = this.parentNode;
-
-                                    var editInput = editRow.querySelector("input[type=text]");
-                                    var label = editRow.querySelector("label");
-                                    var containsClass = editRow.classList.contains("edit");
-
-                                    if(containsClass) {
-                                        label.innerText = editInput.value;
-                                    }
-                                    else {
-                                        editInput.value = label.innerText;
-                                    }
-
-                                    editRow.classList.toggle("edit");
-                                }
-                            </script>';
+                        
+                        $counter = $counter + 1;
                     }
-                    echo '</table';
+                        
+                    ?>
+
+                    <script>
+                    function init() {
+                        var counter = <?php echo $counter ?>;
+                        for (var i = 0; i < counter; i++) {
+                            // Get all the edit buttons
+                            var tablinks = document.getElementById("tabs"+[i]).getElementsByTagName("a");
+                            tablinks[0].onclick = doit;
+                        }
+                    }
+                    function doit() {
+                        var containsClass = this.parentNode.classList.toggle("edit");
+
+                        if(containsClass) {
+                            this.parentNode.querySelector("input").value = this.parentNode.querySelector("label").innerText;
+                        }
+                        else {
+                            this.parentNode.querySelector("label").innerText = this.parentNode.querySelector("input").value;
+                        }
+                    }
+                    window.onload = init;
+
+                    </script>
+
+
+                    <?php
+
+                    echo '</table';     
+                            
+                            
                 }
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
@@ -150,8 +151,10 @@
         else {
             echo '<h3 class="card-header-centered"><a class="signuperror" href="../login/login.php">Log in om het overzicht van een groep te zien</a></h3>';
         }
-
         ?>
+
+        
+
         </div>
     </div>
 </div>

@@ -4,9 +4,10 @@
     if(isset($_POST['add'])) {
         require "localhost-conn.php";
 
-        $mail = $_POST['addmail'];
+        $mail = $_POST['updatemail'];
         $groepid = intval($_GET['groepid']);
         $deelnemerid = intval($_GET['deelnemerid']);
+
 
         // Checking for errors
         if(empty($mail)) {

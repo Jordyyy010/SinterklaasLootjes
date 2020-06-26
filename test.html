@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        li label {
+            display: inline;
+        }
+
+        li input[type=text]{
+            display: none;
+        }
+
+        li.edit input[type=text] {
+            display: inline;
+        }
+
+        li.edit label {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    
+
+<ul id="tabs0">
+    <li>Damaris</li>
+    <li><label>Damarismiddel@hotmail.nl</label><input type="text"><button>Edit0</button></li>
+    <li><a href="#">X</a></li>
+</ul>
+<ul id="tabs1">
+    <li>Jarno</li>
+    <li><label>Jarnomiddel@hotmail.nl</label><input type="text"><button>Edit1</button></li>
+    <li><a href="#">X</a></li>
+</ul>
+<ul id="tabs2">
+    <li>Jordy</li>
+    <li><label>Jordyclement@hotmail.nl</label><input type="text"><button>Edit2</button></li>
+    <li><a href="#">X</a></li>
+</ul>
+
+
+<script>
+    function init() {
+        for (var i = 0; i < 3; i++) {
+            var div = document.getElementById("tabs"+[i]).getElementsByTagName("button");
+            div[0].onclick = doit;
+            // if(div[i] == "undefined") {
+            //     console.log([i]+" werkt niet");
+            // } else {
+            //     div[i].onclick = doit;
+            // }
+        }
+    }
+
+
+
+    function doit() {
+        console.log(this);
+        var containsClass = this.parentNode.classList.toggle("edit");
+
+        if(containsClass) {
+            this.parentNode.querySelector("input").value = this.parentNode.querySelector("label").innerText;
+        }
+        else {
+            this.parentNode.querySelector("label").innerText = this.parentNode.querySelector("input").value;
+        }
+    }
+    window.onload = init;
+
+</script>
+
+</body>
+</html>

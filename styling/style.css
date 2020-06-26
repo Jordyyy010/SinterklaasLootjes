@@ -194,24 +194,60 @@ td:first-child, th:first-child{
 }
 
 td:nth-child(2), th:nth-child(2) {
-    width: 40%;
+    width: 50%;
 }
 
 td:last-child, th:last-child{
     text-align: center;
 }
 
-td input[type=text] {
+td label {
+    display: inline;
+}
+
+td input[type=text]{
     display: none;
+}
+
+td form button[type=submit] {
+    display: none;
+}
+
+td a.uitlog-button-link {
+    display: inline;
+}
+
+td.edit a.uitlog-button-link {
+    display: none;
+}
+
+td.edit form button[type=submit] {
+    display: inline;
 }
 
 td.edit input[type=text] {
     display: inline;
+    flex-grow: 1;
 }
 
 td.edit label {
     display: none;
 }
+
+.secondtab {
+    display: flex;
+    flex-direction: row;
+}
+
+.secondtab label {
+    flex-grow: 1;
+}
+
+.secondtab form {
+    flex-grow: 1;
+}
+
+
 
 
 
