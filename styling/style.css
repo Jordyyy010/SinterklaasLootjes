@@ -177,6 +177,7 @@ h2{
 table {
     border-collapse: collapse;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 tr {
@@ -231,6 +232,10 @@ td.edit input[type=text] {
 }
 
 td.edit label {
+    display: none;
+}
+
+td.noedit a, td.noedit input[type=text], td.noedit form button[type=submit] {
     display: none;
 }
 
